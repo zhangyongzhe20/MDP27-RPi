@@ -1,6 +1,8 @@
 #!/usr/bin/env python2
-
 import socket
+
+__author__ = "Zhang Y.Z."
+
 
 HOST = '10.27.167.70'  # The server's hostname or IP address
 PORT = 5182        # The port used by the server

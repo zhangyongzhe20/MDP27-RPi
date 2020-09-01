@@ -1,10 +1,11 @@
+#!/usr/bin/env python2
 import socket
 import sys
 from config import WIFI_IP as ip, WIFI_PORT as port
 
 __author__ = "Zhang Y.Z."
 
-class PcAPI(object):
+class pcAPI(object):
 
 	def __init__(self):
 		self.tcp_ip = ip
@@ -75,7 +76,7 @@ class PcAPI(object):
 
 # if __name__ == "__main__":
 # 	print "main"
-pc = PcAPI()
+pc = pcAPI()
 pc.init_pc_comm()
 flag = True
 while(flag):
