@@ -16,7 +16,7 @@ class arduinoAPI(object):
 		Initialize serial socket
 		"""
 		try:
-			self.ser = serial.Serial(self.port, self.baud_rate, timeout=3)
+			self.ser = serial.Serial(self.port, self.baud_rate)
 			#time.sleep(1)
 			print "Serial link connected"
 		except Exception, e:
@@ -63,10 +63,8 @@ send_msg = raw_input()
 print "Writing [%s] to arduino" % send_msg
 sr.write_to_serial(send_msg)
 
-print "read"
-print "data received from serial" % sr.read_from_serial
+# print "read"
+# print "data received from serial" % sr.read_from_serial
 
-print "closing sockets"
-sr.close_sr_socket()
-
-     
+# print "closing sockets"
+# sr.close_sr_socket()
