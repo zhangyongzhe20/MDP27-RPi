@@ -14,13 +14,7 @@ class androidAPI:
         self.server_sock.bind(("", RFCOMM_CHANNEL))
 
         self.server_sock.listen(RFCOMM_CHANNEL)
-        bt.advertise_service(
-            self.server_sock, 
-            'MDP_Group_27_RPi',
-            service_id=UUID,
-            service_classes=[UUID, bt.SERIAL_PORT_CLASS],
-            profiles=[bt.SERIAL_PORT_PROFILE]
-        )
+       
         print('server socket:', str(self.server_sock))
         
     def connect(self):
