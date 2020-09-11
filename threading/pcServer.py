@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 import socket
 import sys
-from config import WIFI_IP as ip, WIFI_PORT as port
+from config import WIFI_IP as ip, WIFI_PORT as por, Client_IP as clientIP, Client_PORT as clientPort
 
 __author__ = "Zhang Y.Z."
 
@@ -11,7 +11,7 @@ class pcAPI(object):
         self.tcp_ip = ip
         self.port = port
         self.conn = None
-        self.client = None
+        self.client = clientIP
         self.addr = None
         self.pc_is_connect = False
 
