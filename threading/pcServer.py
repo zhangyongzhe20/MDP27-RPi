@@ -79,12 +79,21 @@ class pcAPI(object):
 pc = pcAPI()
 pc.init_pc_comm()
 flag = True
-while(flag):
-    msg = pc.read_from_PC()
-    print "data received: %s" %msg
-    send_msg = "From RPi To Pc"
-    pc.write_to_PC(send_msg)
-    # if "done" in msg:
-    #     pc.close_pc_socket()
-    #     break
-    
+# while(flag):
+#     msg = pc.read_from_PC()
+#     print "data received: %s" %msg
+#     send_msg = "From RPi To Pc"
+#     pc.write_to_PC(send_msg)
+#     # if "done" in msg:
+#     #     pc.close_pc_socket()
+#     #     break
+
+send_msg = raw_input()
+print "write_to_PC(): %s " % send_msg
+pc.write_to_PC(send_msg)
+
+msg = pc.read_from_PC()
+print "data received: %s " % msg
+
+print "closing sockets"
+pc.close_pc_socket()
