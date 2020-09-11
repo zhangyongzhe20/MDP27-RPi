@@ -1,6 +1,8 @@
 #for pc
 WIFI_IP = "192.168.27.27" #Connecting to IP address of MDPGrp27
 WIFI_PORT = 5182
+Client_IP = ""
+Client_PORT = 
 #for tablet
 N7_MAC = "68:B3:5E:58:97:28"
 #for arduino
