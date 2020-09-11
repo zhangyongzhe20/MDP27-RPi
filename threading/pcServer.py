@@ -95,5 +95,5 @@ while True:
    msg = pc.read_from_PC()
    print "data received: %s " % msg
 
-   print "closing sockets"
+print "closing sockets"
 pc.close_pc_socket()
