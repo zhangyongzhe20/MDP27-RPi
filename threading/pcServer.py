@@ -87,13 +87,13 @@ flag = True
 #     # if "done" in msg:
 #     #     pc.close_pc_socket()
 #     #     break
+while True:
+   send_msg = raw_input()
+   print "write_to_PC(): %s " % send_msg
+   pc.write_to_PC(send_msg)
 
-send_msg = raw_input()
-print "write_to_PC(): %s " % send_msg
-pc.write_to_PC(send_msg)
+   msg = pc.read_from_PC()
+   print "data received: %s " % msg
 
-msg = pc.read_from_PC()
-print "data received: %s " % msg
-
-print "closing sockets"
+   print "closing sockets"
 pc.close_pc_socket()
