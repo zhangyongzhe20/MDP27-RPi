@@ -64,14 +64,15 @@ class Main:
 
     def readPC(self, Rqueue, Aqueue):
         msg = self.pc.read_from_PC()
-        destination = msg[0]
-        dataBody = msg[1:]
-        print "Read from PC: %s\n" % msg
-        if destination == 'a':
-            Aqueue.put_nowait(dataBody)
-            # fatest path
-        else:
-            Rqueue.put_nowait(dataBody)
+        if msg:
+            destination = msg[0]
+            dataBody = msg[1:]
+            print "Read from PC: %s\n" % msg
+            if destination == 'a':
+                Aqueue.put_nowait(dataBody)
+                # fatest path
+            else:
+                Rqueue.put_nowait(dataBody)
 
     def writePC(self, Pqueue):
         if not Pqueue.empty():
