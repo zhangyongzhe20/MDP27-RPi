@@ -19,6 +19,7 @@ class Main:
         #self.android = androidAPI
         # self.robot = robotAPI
         self.pc = pcAPI()
+        self.pc.init_pc_comm()
         #self.android.connect()
         ##self.robot.connect()
         ## explore
