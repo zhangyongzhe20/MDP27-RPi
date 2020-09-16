@@ -78,7 +78,7 @@ class Main:
                    Rqueue.put_nowait(dataBody)
                 else:
                    print "unknown destination for pc message"
-            print "readPC is called"
+        print "readPC is called"
 
 
     def writePC(self, Pqueue):
