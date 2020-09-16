@@ -124,19 +124,18 @@ class Main:
 
 # Driver code
 try:
-    while 1:
-        main = Main()
+
+    main = Main()
         ## Android send init command: 'explore' or 'fastest path'
         ##mode = main.getMode()
-        mode = 'e'
-        pc = pcAPI
+    mode = 'e'
         ## send 'e' or 'f' to PC
-        if pc.pc_is_connected:
-            print 'write init command %s' %mode
-            pc.write_to_PC(mode)
-        print 'running?'
-        while 1:
-            main.Mthreads(mode)
+    if main.pc.pc_is_connected:
+        print 'write init command %s' %mode
+        main.pc.write_to_PC(mode)
+    print 'running?'
+    while 1:
+        main.Mthreads(mode)
         # print("AQueue: ", main.Aqueue.get_nowait())
         # print("RQueue: ", main.Rqueue.get_nowait())
 
