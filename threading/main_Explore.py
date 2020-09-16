@@ -73,8 +73,12 @@ class Main:
             if destination == 'a':
                 Aqueue.put_nowait(dataBody)
                 # fatest path
-            else:
+            elif destination == 'r':
                 Rqueue.put_nowait(dataBody)
+            else:
+                print "unknown destination for pc message"
+        print "readPC is called"
+
 
     def writePC(self, Pqueue):
         if not Pqueue.empty():
