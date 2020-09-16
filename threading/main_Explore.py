@@ -8,6 +8,7 @@ import Queue
 import thread
 import threading
 import os
+import time
 
 
 class Main:
@@ -83,12 +84,21 @@ class Main:
                 print "Write to PC: %s\n" % msg
     # Multi-threadings
 
+    # Define a function for the thread
+    def print_time(self, tName, delay):
+       count = 0
+       while count < 5:
+           time.sleep(delay)
+           count += 1
+           print "%s: %s" % (tName, time.ctime(time.time()) )
+
     def Mthreads(self, mode):
         if mode == 'e':
             try:
                 # PC responds to init command
-               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue))
-               thread.start_new_thread(self.writePC, (self.Pqueue,))
+               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
+               thread.start_new_thread(print_time, ("Thread-1", 2, ))
+            #    thread.start_new_thread(self.writePC, (self.Pqueue,))
             #     # sensor reading msg
             #    thread.start_new_thread(self.readRobot, (self.Pqueue,))
             #    thread.start_new_thread(self.writePC, (self.Pqueue,))
@@ -98,7 +108,8 @@ class Main:
             #    thread.start_new_thread(self.writeAndroid, (self.Aqueue,))
 
             except Exception, e:
-                print "Error in mode %s: %s" % mode % str(e)
+                # print "Error in mode %s: %s" % mode % str(e)
+                print "Error in Mthreading"
 
             while 1:
                 pass
@@ -136,10 +147,8 @@ try:
     # if main.pc.pc_is_connected:
     #     print 'write init command %s' %mode
     #     main.pc.write_to_PC(mode)
-    print 'running?'
     if main.pc.pc_is_connected():
-        while 1:
-            main.Mthreads(mode)
+        main.Mthreads(mode)
         # print("AQueue: ", main.Aqueue.get_nowait())
         # print("RQueue: ", main.Rqueue.get_nowait())
 
