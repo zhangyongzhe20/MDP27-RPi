@@ -11,7 +11,7 @@ class pcAPI(object):
         self.tcp_ip = ip
         self.port = port
         self.conn = None
-        self.client = clientIP
+        self.client = None
         self.addr = None
         self.pc_is_connect = False
 
@@ -57,7 +57,6 @@ class pcAPI(object):
         """
         try:
             self.client.sendto(message, self.addr)
-            print "Sent [%s] to PC [%s]" % message % addr
         except TypeError:
             print "Error: Null value cannot be sent"
 
@@ -67,33 +66,32 @@ class pcAPI(object):
         Read incoming message from PC
         """
         try:
-            pc_data = self.client.recv(2048)
+            data = self.client.recv(1024)
             # print "Read [%s] from PC" %pc_data
-            return pc_data
+            # pc_data = self.client.sendall(data)
+            return data
         except Exception, e:
             print "Error: %s " % str(e)
             print "Value not read from PC"
 
-# if __name__ == "__main__":
-# 	print "main" 
+## Driver code
 pc = pcAPI()
 pc.init_pc_comm()
-flag = True
-# while(flag):
-#     msg = pc.read_from_PC()
-#     print "data received: %s" %msg
-#     send_msg = "From RPi To Pc"
-#     pc.write_to_PC(send_msg)
-#     # if "done" in msg:
-#     #     pc.close_pc_socket()
-#     #     break
-while True:
-   send_msg = raw_input()
-   print "write_to_PC(): %s " % send_msg
-   pc.write_to_PC(send_msg)
+# while True:
+#    data = raw_input()
+#    print "Write to PC(): %s " % data
+#    pc.write_to_PC(data)
 
-   msg = pc.read_from_PC()
-   print "data received: %s " % msg
+while pc.pc_is_connected():
+    data = pc.read_from_PC()
+    if data:
+    #    break
+        print "Read from PC: %s " % data
 
-print "closing sockets"
+
+## some occasion need to close
 pc.close_pc_socket()
+
+
+# msg = pc.read_from_PC()
+# print "data received: %s " % msg

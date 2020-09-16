@@ -1,5 +1,5 @@
 #for pc
-WIFI_IP = "192.168.27.27" #Connecting to IP address of MDPGrp27
+WIFI_IP = "192.168.27.27" #"192.168.27.27" #Connecting to IP address of MDPGrp27 192.168.27.225
 WIFI_PORT = 5182
 Client_IP = "192.168.27.61"
 Client_PORT = 58571
