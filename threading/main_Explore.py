@@ -136,6 +136,7 @@ try:
             pc.write_to_PC(mode)
         while 1:
             main.Mthreads(mode)
+            main.pc.close_pc_socket()
 
         # print("AQueue: ", main.Aqueue.get_nowait())
         # print("RQueue: ", main.Rqueue.get_nowait())
