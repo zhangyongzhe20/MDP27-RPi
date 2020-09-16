@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 import socket
 import sys
-from config import WIFI_IP as ip, WIFI_PORT as port, Client_IP as clientIP, Client_PORT as clientPort
+from config import WIFI_IP as ip, WIFI_PORT as port
 
 __author__ = "Zhang Y.Z."
 
