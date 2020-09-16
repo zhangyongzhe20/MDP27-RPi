@@ -28,6 +28,7 @@ class Main:
         self.Aqueue = Queue.Queue(maxsize=0)
         self.Rqueue = Queue.Queue(maxsize=0)
         self.Pqueue = Queue.Queue(maxsize=0)
+        main.Pqueue.put_nowait("msg from another thread")
 
         # initialization done
 
@@ -135,7 +136,6 @@ try:
         ## send 'e' or 'f' to PC
         if pc.pc_is_connected:
             pc.write_to_PC(mode)
-        main.Pqueue.put_nowait("msg from another thread")
         main.Mthreads(mode)
 
         # print("AQueue: ", main.Aqueue.get_nowait())
