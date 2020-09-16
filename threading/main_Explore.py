@@ -28,7 +28,7 @@ class Main:
         self.Aqueue = Queue.Queue(maxsize=0)
         self.Rqueue = Queue.Queue(maxsize=0)
         self.Pqueue = Queue.Queue(maxsize=0)
-        Pqueue.put_nowait("msg from another thread")
+        self.Pqueue.put_nowait("msg from another thread")
 
         # initialization done
 
@@ -63,23 +63,21 @@ class Main:
     # read/write Robot
 
     def readPC(self, Rqueue, Aqueue):
-        while 1:
-            msg = self.pc.read_from_PC()
-            destination = msg[0]
-            dataBody = msg[1:]
-            print "Read from PC: %s\n" % msg
-            if destination == 'a':
-                Aqueue.put_nowait(dataBody)
+        msg = self.pc.read_from_PC()
+        destination = msg[0]
+        dataBody = msg[1:]
+        print "Read from PC: %s\n" % msg
+        if destination == 'a':
+            Aqueue.put_nowait(dataBody)
             # fatest path
-            else:
-                Rqueue.put_nowait(dataBody)
+        else:
+            Rqueue.put_nowait(dataBody)
 
     def writePC(self, Pqueue):
-        while 1:
-            if not Pqueue.empty():
-                msg = Pqueue.get_nowait()
-                self.pc.write_to_PC(msg)
-                print "Write to PC: %s\n" % msg
+        if not Pqueue.empty():
+            msg = Pqueue.get_nowait()
+            self.pc.write_to_PC(msg)
+            print "Write to PC: %s\n" % msg
 
     # Multi-threadings
 
@@ -136,7 +134,8 @@ try:
         ## send 'e' or 'f' to PC
         if pc.pc_is_connected:
             pc.write_to_PC(mode)
-        main.Mthreads(mode)
+        while 1:
+            main.Mthreads(mode)
 
         # print("AQueue: ", main.Aqueue.get_nowait())
         # print("RQueue: ", main.Rqueue.get_nowait())
