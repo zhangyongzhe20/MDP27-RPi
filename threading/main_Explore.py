@@ -134,6 +134,7 @@ try:
         if pc.pc_is_connected:
             print 'write init command %s' %mode
             pc.write_to_PC(mode)
+        print 'running?'
         while 1:
             main.Mthreads(mode)
         # print("AQueue: ", main.Aqueue.get_nowait())
