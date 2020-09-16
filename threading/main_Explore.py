@@ -78,8 +78,6 @@ class Main:
             msg = Pqueue.get_nowait()
             self.pc.write_to_PC(msg)
             print "Write to PC: %s\n" % msg
-        print "Invoke writePC\n"
-
     # Multi-threadings
 
     def Mthreads(self, mode):
@@ -134,6 +132,7 @@ try:
         pc = pcAPI
         ## send 'e' or 'f' to PC
         if pc.pc_is_connected:
+            print 'write init command %s' %mode
             pc.write_to_PC(mode)
         while 1:
             main.Mthreads(mode)
