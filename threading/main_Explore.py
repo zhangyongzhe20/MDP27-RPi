@@ -77,8 +77,9 @@ class Main:
     def writePC(self, Pqueue):
         if not Pqueue.empty():
             msg = Pqueue.get_nowait()
-            self.pc.write_to_PC(msg)
-            print "Write to PC: %s\n" % msg
+            if msg:
+                self.pc.write_to_PC(msg)
+                print "Write to PC: %s\n" % msg
     # Multi-threadings
 
     def Mthreads(self, mode):
