@@ -65,19 +65,20 @@ class Main:
     # read/write Robot
 
     def readPC(self, Rqueue, Aqueue):
-        msg = self.pc.read_from_PC()
-        if msg:
-            destination = msg[0]
-            dataBody = msg[1:]
-            print "Read from PC: %s\n" % msg
-            if destination == 'a':
-                Aqueue.put_nowait(dataBody)
-                # fatest path
-            elif destination == 'r':
-                Rqueue.put_nowait(dataBody)
-            else:
-                print "unknown destination for pc message"
-        print "readPC is called"
+        while 1:
+            msg = self.pc.read_from_PC()
+            if msg:
+                destination = msg[0]
+                dataBody = msg[1:]
+                print "Read from PC: %s\n" % msg
+                if destination == 'a':
+                   Aqueue.put_nowait(dataBody)
+                 # fatest path
+                elif destination == 'r':
+                   Rqueue.put_nowait(dataBody)
+                else:
+                   print "unknown destination for pc message"
+            print "readPC is called"
 
 
     def writePC(self, Pqueue):
