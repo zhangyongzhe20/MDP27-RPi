@@ -137,7 +137,8 @@ try:
     #     main.pc.write_to_PC(mode)
     print 'running?'
     while 1:
-        main.Mthreads(mode)
+        if main.pc.pc_is_connected():
+            main.Mthreads(mode)
         # print("AQueue: ", main.Aqueue.get_nowait())
         # print("RQueue: ", main.Rqueue.get_nowait())
 
