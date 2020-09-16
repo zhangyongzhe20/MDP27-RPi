@@ -91,7 +91,7 @@ class Main:
     # Define a function for the thread
     def print_time(self, tName, delay):
        count = 0
-       while count < 5:
+       while count < 100:
            time.sleep(delay)
            count += 1
            print "%s: %s" % (tName, time.ctime(time.time()) )
