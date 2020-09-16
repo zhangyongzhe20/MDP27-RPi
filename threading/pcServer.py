@@ -75,22 +75,22 @@ class pcAPI(object):
             print "Value not read from PC"
 
 ## Driver code
-pc = pcAPI()
-pc.init_pc_comm()
-# while True:
-#    data = raw_input()
-#    print "Write to PC(): %s " % data
-#    pc.write_to_PC(data)
+# pc = pcAPI()
+# pc.init_pc_comm()
+# # while True:
+# #    data = raw_input()
+# #    print "Write to PC(): %s " % data
+# #    pc.write_to_PC(data)
 
-while pc.pc_is_connected():
-    data = pc.read_from_PC()
-    if data:
-    #    break
-        print "Read from PC: %s " % data
+# while pc.pc_is_connected():
+#     data = pc.read_from_PC()
+#     if data:
+#     #    break
+#         print "Read from PC: %s " % data
 
 
-## some occasion need to close
-pc.close_pc_socket()
+# ## some occasion need to close
+# pc.close_pc_socket()
 
 
 # msg = pc.read_from_PC()
