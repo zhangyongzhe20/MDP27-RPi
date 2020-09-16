@@ -131,9 +131,10 @@ try:
         ## Android send init command: 'explore' or 'fastest path'
         ##mode = main.getMode()
         mode = 'e'
+        pc = pcAPI
         ## send 'e' or 'f' to PC
-        if pcAPI.pc_is_connected:
-            pcAPI.write_to_PC(mode)
+        if pc.pc_is_connected:
+            pc.write_to_PC(mode)
         main.Pqueue.put_nowait("msg from another thread")
         main.Mthreads(mode)
 
