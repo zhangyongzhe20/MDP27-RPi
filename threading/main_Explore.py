@@ -99,7 +99,7 @@ class Main:
            if not self.Rqueue.empty():
                 print "%s: %s" % (self.Rqueue.get_nowait(), time.ctime(time.time()) )
            elif not self.Aqueue.empty():
-                print "%s: %s" % (self.Rqueue.get_nowait(), time.ctime(time.time()) )
+                print "%s: %s" % (self.Aqueue.get_nowait(), time.ctime(time.time()) )
 
     def Mthreads(self, mode):
         if mode == 'e':
