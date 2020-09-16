@@ -28,7 +28,7 @@ class Main:
         self.Aqueue = Queue.Queue(maxsize=0)
         self.Rqueue = Queue.Queue(maxsize=0)
         self.Pqueue = Queue.Queue(maxsize=0)
-        main.Pqueue.put_nowait("msg from another thread")
+        Pqueue.put_nowait("msg from another thread")
 
         # initialization done
 
