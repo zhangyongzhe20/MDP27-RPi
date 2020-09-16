@@ -97,7 +97,7 @@ class Main:
             try:
                 # PC responds to init command
                thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
-               thread.start_new_thread(print_time, ("Thread-1", 2, ))
+               thread.start_new_thread(self.print_time, ("Thread-1", 2, ))
             #    thread.start_new_thread(self.writePC, (self.Pqueue,))
             #     # sensor reading msg
             #    thread.start_new_thread(self.readRobot, (self.Pqueue,))
