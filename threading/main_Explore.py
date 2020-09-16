@@ -61,7 +61,7 @@ class Main:
 
     # read/write Robot
 
-    def readPC(self, Rqueue, Aqueue, header):
+    def readPC(self, Rqueue, Aqueue):
         while 1:
             msg = self.pc.read_from_PC()
             destination = msg[0]
@@ -86,7 +86,8 @@ class Main:
         if mode == 'e':
             try:
                 # PC responds to init command
-               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, mode))
+               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue))
+               thread.start_new_thread(self.writePC, (self.Pqueue,))
             #     # sensor reading msg
             #    thread.start_new_thread(self.readRobot, (self.Pqueue,))
             #    thread.start_new_thread(self.writePC, (self.Pqueue,))
@@ -133,10 +134,11 @@ try:
         ## send 'e' or 'f' to PC
         if pcAPI.pc_is_connected:
             pcAPI.write_to_PC(mode)
+        main.Pqueue.put_nowait("msg from another thread")
         main.Mthreads(mode)
 
-        print("AQueue: ", main.Aqueue.get_nowait())
-        print("RQueue: ", main.Rqueue.get_nowait())
+        # print("AQueue: ", main.Aqueue.get_nowait())
+        # print("RQueue: ", main.Rqueue.get_nowait())
 
 except KeyboardInterrupt:
     print "Terminating the main program now..."
