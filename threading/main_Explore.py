@@ -130,9 +130,9 @@ try:
         ##mode = main.getMode()
     mode = 'e'
         ## send 'e' or 'f' to PC
-    if main.pc.pc_is_connected:
-        print 'write init command %s' %mode
-        main.pc.write_to_PC(mode)
+    # if main.pc.pc_is_connected:
+    #     print 'write init command %s' %mode
+    #     main.pc.write_to_PC(mode)
     print 'running?'
     while 1:
         main.Mthreads(mode)
