@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" modified="2020-09-11T15:41:48.082Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36" etag="0V2R9_e1DERZEu4xeMRl" version="13.6.9" type="github">
+  <diagram id="8ahCur5ZWdasBS0POo71" name="Page-1">
+    <mxGraphModel dx="1810" dy="1112" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-1" value="MessageHeader For Exploration" style="shape=table;html=1;whiteSpace=wrap;startSize=30;container=1;collapsible=0;childLayout=tableLayout;fontStyle=1;align=center;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="20" y="170" width="1040" height="645" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-2" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-1">
+          <mxGeometry y="30" width="1040" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-20" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-2">
+          <mxGeometry width="200" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-14" value="Message" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-2">
+          <mxGeometry x="200" width="280" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-3" value="&lt;b&gt;Note&lt;/b&gt;&lt;br&gt;All end sides should indicate the owner of the message in the header" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-2">
+          <mxGeometry x="480" width="560" height="153" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-6" value="" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-1">
+          <mxGeometry y="183" width="1040" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-21" value="Android" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-6">
+          <mxGeometry width="200" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-15" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-6">
+          <mxGeometry x="200" width="280" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-7" value="&lt;br&gt;Assume android message only for PC, so RPi just forward any messages from android to PC." style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-6">
+          <mxGeometry x="480" width="560" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-23" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-1">
+          <mxGeometry y="337" width="1040" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-24" value="Robot" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-23">
+          <mxGeometry width="200" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-25" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-23">
+          <mxGeometry x="200" width="280" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-26" value="&lt;span&gt;Assume robot message only for PC, so RPi just forward any messages from android to PC.&lt;/span&gt;" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-23">
+          <mxGeometry x="480" width="560" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-28" style="shape=partialRectangle;html=1;whiteSpace=wrap;collapsible=0;dropTarget=0;pointerEvents=0;fillColor=none;top=0;left=0;bottom=0;right=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-1">
+          <mxGeometry y="491" width="1040" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-29" value="PC" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-28">
+          <mxGeometry width="200" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-30" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-28">
+          <mxGeometry x="200" width="280" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-31" value="&lt;b&gt;There are two possible ways for PC(please choose one at last):&lt;br&gt;&lt;/b&gt;1.indicate the destination in the second header, which is applied for the msg is sent seperately to android and robot.&amp;nbsp;&lt;br&gt;2. put a delimiter in the message body, which is applied for the msg is sent to android and robot together, so RPi will further split it into two msg and sent them to android and robot" style="shape=partialRectangle;html=1;whiteSpace=wrap;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;overflow=hidden;fontSize=18;" vertex="1" parent="60DBv6X6D8Py6wRY3a6k-28">
+          <mxGeometry x="480" width="560" height="154" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-35" value="a" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="240" y="400" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-36" value="data body" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="280" y="400" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-37" value="r" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="240" y="555" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-38" value="data body" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="280" y="555" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-39" value="p" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="243.5" y="680" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-40" value="data body" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="323.5" y="680" width="136.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-41" value="a/r" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="283.5" y="680" width="40" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-43" value="a_data &#39;|&#39; r_data&amp;nbsp;&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="283.5" y="750" width="176.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="60DBv6X6D8Py6wRY3a6k-44" value="p" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="243.5" y="750" width="40" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
