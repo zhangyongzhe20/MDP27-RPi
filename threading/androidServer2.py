@@ -72,7 +72,7 @@ class androidAPI(object):
 if __name__ == "__main__":
 	print "Running Main"
 	bt = androidAPI()
-	bt.init_bluetooth()
+	bt.connect()
 
 # 	send_msg = raw_input()
 # 	print "Write(): %s " % send_msg
