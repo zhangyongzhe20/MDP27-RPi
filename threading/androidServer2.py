@@ -69,10 +69,10 @@ class androidAPI(object):
             print "Bluetooth Error. Connection reset by peer. Trying to connect..."
             self.connect_bluetooth()  # Reestablish connection
 
-# if __name__ == "__main__":
-# 	print "Running Main"
-# 	bt = AndroidAPI()
-# 	bt.init_bluetooth()
+if __name__ == "__main__":
+	print "Running Main"
+	bt = androidAPI()
+	bt.init_bluetooth()
 
 # 	send_msg = raw_input()
 # 	print "Write(): %s " % send_msg
