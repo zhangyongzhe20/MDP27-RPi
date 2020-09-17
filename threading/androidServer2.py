@@ -3,9 +3,7 @@ from config import RFCOMM_CHANNEL as RFCOMM_CHANNEL, UUID as UUID, ANDROID_SOCKE
 
 __author__ = 'Zhang Y.Z.'
 
-
-class AndroidAPI(object):
-
+class androidAPI(object):
     def __init__(self):
         self.server_socket = None
         self.client_socket = None
@@ -23,10 +21,9 @@ class AndroidAPI(object):
             print "Closing server socket"
         self.bt_is_connected = False
 
-
     def isConnected(self):
         return self.bt_is_connected
-        
+
     def connect(self):
         # Creating the server socket and bind to port
         try:
@@ -36,10 +33,10 @@ class AndroidAPI(object):
             self.port = self.server_socket.getsockname()[1]
 
             bt.advertise_service(self.server_socket, "SampleServer",
-                               service_id=UUID,
-                               service_classes=[UUID, bt.SERIAL_PORT_CLASS],
-                               profiles=[bt.SERIAL_PORT_PROFILE],
-                                )
+                                 service_id=UUID,
+                                 service_classes=[UUID, bt.SERIAL_PORT_CLASS],
+                                 profiles=[bt.SERIAL_PORT_PROFILE],
+                                 )
             print "Waiting for BT connection on RFCOMM channel %d" % self.port
             # Accept requests
             self.client_socket, client_address = self.server_socket.accept()
@@ -72,14 +69,11 @@ class AndroidAPI(object):
             print "Bluetooth Error. Connection reset by peer. Trying to connect..."
             self.connect_bluetooth()  # Reestablish connection
 
-
-
-
 # if __name__ == "__main__":
 # 	print "Running Main"
 # 	bt = AndroidAPI()
 # 	bt.init_bluetooth()
-    
+
 # 	send_msg = raw_input()
 # 	print "Write(): %s " % send_msg
 # 	bt.write_to_bt(send_msg)
@@ -89,4 +83,3 @@ class AndroidAPI(object):
 
 # 	print "closing sockets"
 # 	bt.close_bt_socket()
-
