@@ -69,7 +69,7 @@ class Main:
             Pqueue.put_nowait(msg)
             print "Read from Robot: %s\n" % msg
 
-    def writeRobot2(self, Rqueue):
+    def writeRobot2(self):
         while 1:
             msg =  raw_input()
             self.robot.write_to_serial(msg)
