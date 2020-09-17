@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
-# from arduinoServer import robotAPI
-# from androidServer import androidAPI
+from arduinoServer import robotAPI
+from androidServer import androidAPI
 from pcServer import pcAPI
 from config import *
 
@@ -10,27 +10,25 @@ import threading
 import os
 import time
 
-
+__author__ = "Zhang Y.Z."
 class Main:
     def __init__(self):
         # allow rpi android to be discoverable
         # os.system("sudo hciconfig hci0 piscan")
 
         # initial connections
-        #self.android = androidAPI
-        # self.robot = robotAPI
+        self.android = androidAPI()
+        self.robot = robotAPI()
         self.pc = pcAPI()
         self.pc.init_pc_comm()
-        #self.android.connect()
-        ##self.robot.connect()
-        ## explore
-        self.mode = 'e'
+        self.android.connect()
+        self.robot.connect_serial()
+        
 
         # initialize queues
         self.Aqueue = Queue.Queue(maxsize=0)
         self.Rqueue = Queue.Queue(maxsize=0)
         self.Pqueue = Queue.Queue(maxsize=0)
-        self.Pqueue.put_nowait("msg from another thread")
 
         # initialization done
 
@@ -82,39 +80,43 @@ class Main:
 
 
     def writePC(self, Pqueue):
-        if not Pqueue.empty():
-            msg = Pqueue.get_nowait()
-            if msg:
-                self.pc.write_to_PC(msg)
-                print "Write to PC: %s\n" % msg
-    # Multi-threadings
+        while 1:
+            if not Pqueue.empty():
+                msg = Pqueue.get_nowait()
+                if msg:
+                   self.pc.write_to_PC(msg)
+                   print "Write to PC: %s\n" % msg
 
-    # Define a function for the thread
-    def print_time(self, tName, delay):
-       count = 0
-       while count < 100:
-           time.sleep(delay)
-           count += 1
-           print "count: %s"  %count
-           if not self.Rqueue.empty():
-                print "%s: %s" % (self.Rqueue.get_nowait(), time.ctime(time.time()) )
-           elif not self.Aqueue.empty():
-                print "%s: %s" % (self.Aqueue.get_nowait(), time.ctime(time.time()) )
+
+    # Define a function for testing Mthread
+    # def print_time(self, tName, delay):
+    #    count = 0
+    #    while count < 100:
+    #        time.sleep(delay)
+    #        count += 1
+    #        print "count: %s"  %count
+    #        if not self.Rqueue.empty():
+    #             print "%s: %s" % (self.Rqueue.get_nowait(), time.ctime(time.time()) )
+    #        elif not self.Aqueue.empty():
+    #             print "%s: %s" % (self.Aqueue.get_nowait(), time.ctime(time.time()) )
+
 
     def Mthreads(self, mode):
         if mode == 'e':
             try:
+               #For testing
+            #    thread.start_new_thread(self.print_time, ("Thread-1", 2, ))
+
                 # PC responds to init command
                thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
-               thread.start_new_thread(self.print_time, ("Thread-1", 2, ))
-            #    thread.start_new_thread(self.writePC, (self.Pqueue,))
+            #     explore path msg
+               thread.start_new_thread(self.writeRobot,(self.Rqueue,))
             #     # sensor reading msg
-            #    thread.start_new_thread(self.readRobot, (self.Pqueue,))
-            #    thread.start_new_thread(self.writePC, (self.Pqueue,))
+               thread.start_new_thread(self.readRobot,(self.Pqueue,))
+               thread.start_new_thread(self.writePC,(self.Pqueue,))
+                 # map info
+               thread.start_new_thread(self.writeAndroid,(self.Aqueue,))
             #    # image recognition????????????????
-            #    thread.start_new_thread(
-            #        self.readPC, (self.Rqueue, self.Aqueue, mode))
-            #    thread.start_new_thread(self.writeAndroid, (self.Aqueue,))
 
             except Exception, e:
                 # print "Error in mode %s: %s" % mode % str(e)
@@ -123,6 +125,7 @@ class Main:
             while 1:
                 pass
 
+        # fastest path
         # else:
         #     try:
         #         thread.start_new_thread(self.readAndroid, (self.Pqueue,))
@@ -149,17 +152,14 @@ class Main:
 try:
 
     main = Main()
+
+    if main.android.isConnected() and main.pc.pc_is_connected():
+        mode = main.getMode()
+        print 'write init command %s' %mode
         ## Android send init command: 'explore' or 'fastest path'
-        ##mode = main.getMode()
-    mode = 'e'
-        ## send 'e' or 'f' to PC
-    # if main.pc.pc_is_connected:
-    #     print 'write init command %s' %mode
-    #     main.pc.write_to_PC(mode)
-    if main.pc.pc_is_connected():
+        main.pc.write_to_PC(mode)
+        ## after send init command, start Mthread 
         main.Mthreads(mode)
-        # print("AQueue: ", main.Aqueue.get_nowait())
-        # print("RQueue: ", main.Rqueue.get_nowait())
 
 except KeyboardInterrupt:
     print "Terminating the main program now..."

@@ -5,7 +5,7 @@ from config import BAUD as baud, SER_PORT0 as ser_port
 
 __author__ = "Zhang Y.Z."
 
-class arduinoAPI(object):
+class robotAPI(object):
 	def __init__(self):
 		self.port = ser_port
 		self.baud_rate = baud
@@ -32,36 +32,36 @@ class arduinoAPI(object):
 
 	def write_to_serial(self, msg):
 		"""
-		Write to arduino
+		Write to robot
 		"""
 		try:
 			self.ser.write(msg)
-			# print "Write to arduino: %s " % msg
+			# print "Write to robot: %s " % msg
 		except AttributeError:
 			print "Error in serial comm. No value to be written. Check connection!"
 
 	def read_from_serial(self):
 		"""
-		Read from arduino
+		Read from robot
 
-		Waits until data is received from arduino
+		Waits until data is received from robot
 		"""
 		try:
 			received_data = self.ser.readline()
-			# print "Received from arduino: %s " % received_data
+			# print "Received from robot: %s " % received_data
 			return received_data
 		except AttributeError:
 			print "Error in serial comm. No value received. Check connection!"
 
 
 
-print "Running Main"
-sr = arduinoAPI()
-sr.connect_serial()
+# print "Running Main"
+# sr = robotAPI()
+# sr.connect_serial()
 
-send_msg = raw_input()
-print "Writing [%s] to arduino" % send_msg
-sr.write_to_serial(send_msg)
+# send_msg = raw_input()
+# print "Writing [%s] to robot" % send_msg
+# sr.write_to_serial(send_msg)
 
 # print "read"
 # print "data received from serial" % sr.read_from_serial

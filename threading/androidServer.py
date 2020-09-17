@@ -1,14 +1,12 @@
 import bluetooth as bt
+from config import LOCALE as LOCALE, RFCOMM_CHANNEL as RFCOMM_CHANNEL, UUID as UUID, ANDROID_SOCKET_BUFFER_SIZE as ANDROID_SOCKET_BUFFER_SIZE
 
-LOCALE = 'UTF-8'
-RFCOMM_CHANNEL = 7
-UUID = '443559ba-b80f-4fb6-99d9-ddbcd6138fbd'
-ANDROID_SOCKET_BUFFER_SIZE = 512
 
 class androidAPI:
     def __init__(self):
         self.server_sock = None
         self.client_sock = None
+        self.isConnect = False
         
         self.server_sock = bt.BluetoothSocket(bt.RFCOMM)
         self.server_sock.bind(("", RFCOMM_CHANNEL))
@@ -16,6 +14,9 @@ class androidAPI:
         self.server_sock.listen(RFCOMM_CHANNEL)
        
         print('server socket:', str(self.server_sock))
+
+    def isConnected(self):
+        return self.isConnect
         
     def connect(self):
         while True:
@@ -26,6 +27,7 @@ class androidAPI:
 
                 if self.client_sock is None:
                     self.client_sock, address = self.server_sock.accept()
+                    self.isConnect = True
                     print("Successfully connected to Android at: " + str(address))
                     retry = False
 
@@ -97,9 +99,9 @@ class androidAPI:
             print('Android write failed: ' + str(error))
             raise error
 
-if __name__ == "__main__":
-  andr = androidAPI()
-  andr.connect()
-  andr.read()
-  andr.write("Hey")
-  andr.disconnect()
+# if __name__ == "__main__":
+#   andr = androidAPI()
+#   andr.connect()
+#   andr.read()
+#   andr.write("Hey")
+#   andr.disconnect()
