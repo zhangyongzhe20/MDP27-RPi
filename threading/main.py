@@ -50,7 +50,7 @@ class Main:
             print "Read from PC: %s\n" % msg
             queue.put_nowait(msg)
 
-    def writeAll(self, queue):
+    def writeAll(self, queue):      # Message must be in the format TARGET:MESSAGE
         while 1:
             if not queue.empty():
                 msg = queue.get_nowait()
