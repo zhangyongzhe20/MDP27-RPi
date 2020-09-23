@@ -86,7 +86,7 @@ class androidAPI(object):
             self.client_socket.send(str(message))
         except bt.BluetoothError:
             print "Bluetooth Error. Connection reset by peer"
-            self.connect_bluetooth()  # Reestablish connection
+            self.connect()  # Reestablish connection
 
     def read(self):
         """
@@ -99,7 +99,7 @@ class androidAPI(object):
                 return msg
         except bt.BluetoothError:
             print "Bluetooth Error. Connection reset by peer. Trying to connect..."
-            self.connect_bluetooth()  # Reestablish connection
+            self.connect()  # Reestablish connection
 
 if __name__ == "__main__":
 	print "Running Main"
