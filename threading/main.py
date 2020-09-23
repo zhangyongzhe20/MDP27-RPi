@@ -70,10 +70,15 @@ class Main:
     def Mthreads(self):
         try:
             # sensor reading msg
-            thread.start_new_thread(self.readBluetooth, (self.queue,))
-            # thread.start_new_thread(self.readArduino, (self.queue,))
-            # thread.start_new_thread(self.readPC, (self.queue,))
-            thread.start_new_thread(self.writeAll, (self.queue,))
+            t1 = thread.start_new_thread(self.readBluetooth, (self.queue,))
+            # t2 = thread.start_new_thread(self.readArduino, (self.queue,))
+            # t3 = thread.start_new_thread(self.readPC, (self.queue,))
+            t4 = thread.start_new_thread(self.writeAll, (self.queue,))
+
+            t1.join()
+            t2.join()
+            t3.join()
+            t4.join()
 
         except Exception, e:
             print "Error : %s" % str(e)
@@ -83,6 +88,7 @@ class Main:
 try:
     main = Main()
     main.Mthreads()
+
 
 except KeyboardInterrupt:
     print "Terminating the main program now..."
