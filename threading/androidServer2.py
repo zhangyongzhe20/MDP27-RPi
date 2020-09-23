@@ -32,11 +32,11 @@ class androidAPI(object):
             self.server_socket.listen(1)  # Listen for requests
             self.port = self.server_socket.getsockname()[1]
 
-            bt.advertise_service(self.server_socket, "SampleServer",
-                                 service_id=UUID,
-                                 service_classes=[UUID, bt.SERIAL_PORT_CLASS],
-                                 profiles=[bt.SERIAL_PORT_PROFILE],
-                                 )
+            # bt.advertise_service(self.server_socket, "SampleServer",
+            #                      service_id=UUID,
+            #                      service_classes=[UUID, bt.SERIAL_PORT_CLASS],
+            #                      profiles=[bt.SERIAL_PORT_PROFILE],
+            #                      )
             print "Waiting for BT connection on RFCOMM channel %d" % self.port
             # Accept requests
             self.client_socket, client_address = self.server_socket.accept()
