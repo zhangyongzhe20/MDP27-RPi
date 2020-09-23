@@ -62,7 +62,7 @@ class Main:
     def Mthreads(self):
         try:
             # sensor reading msg
-            thread.start_new_thread(self.readAndroid, (self.queue,))
+            thread.start_new_thread(self.readBluetooth, (self.queue,))
             thread.start_new_thread(self.readArduino, (self.queue,))
             thread.start_new_thread(self.readPC, (self.queue,))
             thread.start_new_thread(self.writeAll, (self.queue,))
