@@ -19,10 +19,7 @@ class Main:
         self.bluetooth = androidAPI()
         #self.arduino = robotAPI()
         #self.pc = pcAPI()
-        print("Before connect")
         self.bluetooth.connect()
-
-        print("test1")
         #self.arduino.connect_serial()
         self.mode = 0
 
@@ -117,10 +114,10 @@ class Main:
          # mode = 1 for exploration, mode = 2 for fast
         if self.mode == 0:
             self.msg = self.bluetooth.read()
-        if msg:
+        if self.msg:
             Pqueue.put_nowait(msg)
             Aqueue.put_nowait(msg)
-        return msg
+        return self.msg
 
 
 # Driver code
