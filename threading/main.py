@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
-from arduinoServer import arduinoAPI
-from androidServer import androidAPI
+from arduinoServer import robotAPI
+from androidServer2 import androidAPI
 from pcServer import pcAPI
 from config import *
 
@@ -16,11 +16,11 @@ class Main:
         # os.system("sudo hciconfig hci0 piscan")
 
         # initial connections
-        self.bluetooth = androidAPI
-        self.arduino = arduinoAPI
-        self.pc = pcAPI
+        self.bluetooth = androidAPI()
+        self.arduino = robotAPI()
+        self.pc = pcAPI()
         self.bluetooth.connect()
-        self.arduino.connect()
+        self.arduino.connect_serial()
         self.mode = 0
 
         # initialize queues
