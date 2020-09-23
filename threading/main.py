@@ -17,10 +17,13 @@ class Main:
 
         # initial connections
         self.bluetooth = androidAPI()
-        self.arduino = robotAPI()
-        self.pc = pcAPI()
+        #self.arduino = robotAPI()
+        #self.pc = pcAPI()
+        print("Before connect")
         self.bluetooth.connect()
-        self.arduino.connect_serial()
+
+        print("test1")
+        #self.arduino.connect_serial()
         self.mode = 0
 
         # initialize queues
@@ -122,9 +125,10 @@ class Main:
 
 # Driver code
 try:
+    main = Main()
+    mode = main.getMode()
     while 1:
-        main = Main()
-        mode = main.getMode()
+       
         main.Mthreads(mode)
 
 except KeyboardInterrupt:

@@ -62,9 +62,10 @@ class androidAPI(object):
         Read incoming message from Nexus
         """
         try:
-            msg = self.client_socket.recv(2048)
-            # print "Received [%s] " % msg
-            return msg
+            if self.client_socket != None:
+                msg = self.client_socket.recv(2048)
+                # print "Received [%s] " % msg
+                return msg
         except bt.BluetoothError:
             print "Bluetooth Error. Connection reset by peer. Trying to connect..."
             self.connect_bluetooth()  # Reestablish connection
