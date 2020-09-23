@@ -13,7 +13,7 @@ class androidAPI(object):
         self.server_socket.listen(RFCOMM_CHANNEL)  # Listen for requests
         self.port = self.server_socket.getsockname()[1]
 
-        print('server socket:', str(self.server_sock))
+        print('server socket:', str(self.server_socket))
 
     def disconnect(self):
         """
