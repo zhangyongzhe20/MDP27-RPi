@@ -112,7 +112,7 @@ class Main:
 
     def getMode(self):
          # mode = 1 for exploration, mode = 2 for fast
-        if mode == 0:
+        if self.mode == 0:
             self.msg = self.bluetooth.read()
         if msg:
             Pqueue.put_nowait(msg)
