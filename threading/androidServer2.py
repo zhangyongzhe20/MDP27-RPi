@@ -72,15 +72,15 @@ class androidAPI(object):
 
 if __name__ == "__main__":
 	print "Running Main"
-	bt = androidAPI()
-	bt.connect()
+	an = androidAPI()
+	an.connect()
 
 	send_msg = raw_input()
 	print "Write(): %s " % send_msg
-	bt.write(send_msg)
+	an.write(send_msg)
 
 	print "read"
-	print "data received: %s " % bt.read()
+	print "data received: %s " % an.read()
 
 	print "closing sockets"
-	bt.disconnect()
+	an.disconnect()
