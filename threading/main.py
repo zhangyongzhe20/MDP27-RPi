@@ -54,8 +54,16 @@ class Main:
         while 1:
             if not queue.empty():
                 msg = queue.get_nowait()
-                self.bluetooth.write(msg)
-                print "Write to Android: %s\n" % msg
+                arr = msg.split(':')
+                if arr[0] == 'ANDROID':
+                  self.bluetooth.write(msg)
+                  print "Write to Android: %s\n" % msg
+                elif arr[0] == 'ARDUINO':
+                  self.arduino.write(msg)
+                  print "Write to Arduino: %s\n" % msg
+                elif arr[0] == 'PC':
+                  self.pc.write(msg)
+                  print "Write to PC: %s\n" % msg
 
     # Multi-threadings
 
@@ -63,8 +71,8 @@ class Main:
         try:
             # sensor reading msg
             thread.start_new_thread(self.readBluetooth, (self.queue,))
-            thread.start_new_thread(self.readArduino, (self.queue,))
-            thread.start_new_thread(self.readPC, (self.queue,))
+            # thread.start_new_thread(self.readArduino, (self.queue,))
+            # thread.start_new_thread(self.readPC, (self.queue,))
             thread.start_new_thread(self.writeAll, (self.queue,))
 
         except Exception, e:
