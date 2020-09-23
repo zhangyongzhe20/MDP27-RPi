@@ -8,6 +8,12 @@ class androidAPI(object):
         self.server_socket = None
         self.client_socket = None
         self.bt_is_connected = False
+        self.server_socket = bt.BluetoothSocket(bt.RFCOMM)
+        self.server_socket.bind(("", RFCOMM_CHANNEL))
+        self.server_socket.listen(RFCOMM_CHANNEL)  # Listen for requests
+        self.port = self.server_socket.getsockname()[1]
+
+        print('server socket:', str(self.server_sock))
 
     def disconnect(self):
         """
@@ -26,26 +32,51 @@ class androidAPI(object):
 
     def connect(self):
         # Creating the server socket and bind to port
-        try:
-            self.server_socket = bt.BluetoothSocket(bt.RFCOMM)
-            self.server_socket.bind(("", RFCOMM_CHANNEL))
-            self.server_socket.listen(1)  # Listen for requests
-            self.port = self.server_socket.getsockname()[1]
+        # try:
+        #     self.server_socket = bt.BluetoothSocket(bt.RFCOMM)
+        #     self.server_socket.bind(("", RFCOMM_CHANNEL))
+        #     self.server_socket.listen(RFCOMM_CHANNEL)  # Listen for requests
+        #     self.port = self.server_socket.getsockname()[1]
 
-            # bt.advertise_service(self.server_socket, "SampleServer",
-            #                      service_id=UUID,
-            #                      service_classes=[UUID, bt.SERIAL_PORT_CLASS],
-            #                      profiles=[bt.SERIAL_PORT_PROFILE],
-            #                      )
-            print "Waiting for BT connection on RFCOMM channel %d" % self.port
-            # Accept requests
-            self.client_socket, client_address = self.server_socket.accept()
-            print "Accepted connection from ", client_address
-            self.bt_is_connected = True
+        #     # bt.advertise_service(self.server_socket, "SampleServer",
+        #     #                      service_id=UUID,
+        #     #                      service_classes=[UUID, bt.SERIAL_PORT_CLASS],
+        #     #                      profiles=[bt.SERIAL_PORT_PROFILE],
+        #     #                      )
+        #     print "Waiting for BT connection on RFCOMM channel %d" % self.port
+        #     # Accept requests
+        #     self.client_socket, client_address = self.server_socket.accept()
+        #     print "Accepted connection from ", client_address
+        #     self.bt_is_connected = True
 
-        except Exception, e:
-            print "Error: %s" % str(e)
-            # self.close_bt_socket()
+        # except Exception, e:
+        #     print "Error: %s" % str(e)
+        #     # self.close_bt_socket()
+        while True:
+            retry = False
+
+            try:
+                print('Establishing connection with Android...')
+
+                if self.client_sock is None:
+                    self.client_sock, address = self.server_sock.accept()
+                    self.isConnect = True
+                    print("Successfully connected to Android at: " + str(address))
+                    retry = False
+
+            except Exception as error:	
+                print("Connection with Android failed: " + str(error))
+
+                if self.client_sock is not None:
+                    self.client_sock.close()
+                    self.client_sock = None
+                
+                retry = True
+
+            if not retry:
+                break
+
+            print('Retrying Bluetooth Connection to Android...')
 
     def write(self, message):
         """
