@@ -58,8 +58,8 @@ class androidAPI(object):
             try:
                 print('Establishing connection with Android...')
 
-                if self.client_sock is None:
-                    self.client_sock, address = self.server_sock.accept()
+                if self.client_socket is None:
+                    self.client_socket, address = self.server_socket.accept()
                     self.isConnect = True
                     print("Successfully connected to Android at: " + str(address))
                     retry = False
@@ -67,9 +67,9 @@ class androidAPI(object):
             except Exception as error:	
                 print("Connection with Android failed: " + str(error))
 
-                if self.client_sock is not None:
-                    self.client_sock.close()
-                    self.client_sock = None
+                if self.client_socket is not None:
+                    self.client_socket.close()
+                    self.client_socket = None
                 
                 retry = True
 
