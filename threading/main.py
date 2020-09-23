@@ -56,7 +56,7 @@ class Main:
                 msg = queue.get_nowait()
                 arr = msg.split(':')
                 target = arr.pop(0)
-                msg = arr.join(':')
+                msg = ':'.join(arr)
                 if target == 'ANDROID':
                   self.bluetooth.write(msg)
                   print "Write to Android: %s\n" % msg
