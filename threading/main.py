@@ -75,11 +75,6 @@ class Main:
             # t3 = thread.start_new_thread(self.readPC, (self.queue,))
             t4 = thread.start_new_thread(self.writeAll, (self.queue,))
 
-            t1.join()
-            t2.join()
-            t3.join()
-            t4.join()
-
         except Exception, e:
             print "Error : %s" % str(e)
 
@@ -89,6 +84,8 @@ try:
     main = Main()
     main.Mthreads()
 
+    while 1:
+      pass
 
 except KeyboardInterrupt:
     print "Terminating the main program now..."
