@@ -68,7 +68,7 @@ class pcAPI(object):
         Read incoming message from PC
         """
         try:
-            data = self.client.recv(1024)
+            data = self.client.recv(4096)
             # print "Read [%s] from PC" %pc_data
             # pc_data = self.client.sendall(data)
             return data
