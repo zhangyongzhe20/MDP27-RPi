@@ -40,6 +40,7 @@ class pcAPI(object):
         # Create a TCP/IP socket
         try:
             self.conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            self.conn.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             self.conn.bind((self.tcp_ip, self.port))
             self.conn.listen(1)		#Listen for incoming connections
             print "Listening for incoming connections from PC..."
