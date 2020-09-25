@@ -91,7 +91,7 @@ class Main:
     def writePC2(self):
         while 1:
             msg =  raw_input()
-            self.pc.write_to_PC(msg)
+            self.pc.write_to_PC(msg + "\n")
             print "Write to PC: %s\n" % msg
 
 
