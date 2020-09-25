@@ -99,9 +99,9 @@ class androidAPI:
             print('Android write failed: ' + str(error))
             raise error
 
-# if __name__ == "__main__":
-#   andr = androidAPI()
-#   andr.connect()
-#   andr.read()
-#   andr.write("Hey")
-#   andr.disconnect()
+if __name__ == "__main__":
+  andr = androidAPI()
+  andr.connect()
+  andr.read()
+  andr.write("Hey")
+  andr.disconnect()

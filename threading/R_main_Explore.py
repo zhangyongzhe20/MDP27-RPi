@@ -129,7 +129,7 @@ class Main:
             #    thread.start_new_thread(self.print_time, ("Thread-1", 2, ))
 
                 # PC responds to init command
-            #    thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
+               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
             #    thread.start_new_thread(self.writePC2,())
                thread.start_new_thread(self.readRobot2,(self.Pqueue,))
             #     explore path msg

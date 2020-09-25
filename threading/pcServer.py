@@ -56,7 +56,9 @@ class pcAPI(object):
         Write message to PC
         """
         try:
+            print "send1 %s" % message
             self.client.sendto(message, self.addr)
+            print "send %s" % message
         except TypeError:
             print "Error: Null value cannot be sent"
 
@@ -74,13 +76,13 @@ class pcAPI(object):
             print "Error: %s " % str(e)
             print "Value not read from PC"
 
-## Driver code
-# pc = pcAPI()
-# pc.init_pc_comm()
-# # while True:
-# #    data = raw_input()
-# #    print "Write to PC(): %s " % data
-# #    pc.write_to_PC(data)
+# Driver code
+pc = pcAPI()
+pc.init_pc_comm()
+while True:
+   data = raw_input()
+   print "Write to PC(): %s " % data
+   pc.write_to_PC(data)
 
 # while pc.pc_is_connected():
 #     data = pc.read_from_PC()
@@ -89,8 +91,8 @@ class pcAPI(object):
 #         print "Read from PC: %s " % data
 
 
-# ## some occasion need to close
-# pc.close_pc_socket()
+## some occasion need to close
+pc.close_pc_socket()
 
 
 # msg = pc.read_from_PC()

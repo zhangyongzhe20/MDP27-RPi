@@ -29,6 +29,7 @@ class Main:
         self.Aqueue = Queue.Queue(maxsize=0)
         self.Rqueue = Queue.Queue(maxsize=0)
         self.Pqueue = Queue.Queue(maxsize=0)
+        self.Pqueue.put_nowait('testttt')
 
         # initialization done
 
@@ -119,7 +120,7 @@ class Main:
             #     explore path msg
             #    thread.start_new_thread(self.writeRobot,(self.Rqueue,))
             #     # sensor reading msg
-               thread.start_new_thread(self.writePC2,())
+               thread.start_new_thread(self.writePC,(self.Pqueue,))
             #    thread.start_new_thread(self.writePC,(self.Pqueue,))
                  # map info
             #    thread.start_new_thread(self.writeAndroid,(self.Aqueue,))
@@ -164,7 +165,7 @@ try:
         # mode = main.getMode()
         # print 'write init command %s' %mode
         ## Android send init command: 'explore' or 'fastest path'
-    main.pc.write_to_PC('ae')
+    # main.pc.write_to_PC('ae')
     # main.robot.write_to_serial('ae')
         ## after send init command, start Mthread 
     main.Mthreads('e')
