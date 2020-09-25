@@ -56,9 +56,8 @@ class pcAPI(object):
         Write message to PC
         """
         try:
-            print "send1 %s" % message
-            self.client.sendto(message, self.addr)
-            print "send %s" % message
+            # self.client.sendto(message, self.addr)
+            self.client.sendall(message)
         except TypeError:
             print "Error: Null value cannot be sent"
 
