@@ -1,4 +1,4 @@
-import bluetooth as bt
+from bluetooth import *
 from config import RFCOMM_PORT as RFCOMM_PORT, UUID as UUID, ANDROID_SOCKET_BUFFER_SIZE as ANDROID_SOCKET_BUFFER_SIZE
 
 __author__ = 'Zhang Y.Z.'
