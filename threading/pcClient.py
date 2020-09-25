@@ -12,15 +12,18 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:    
     s.connect((HOST, PORT))
 ## testing send streaming
-    # while True:
-    #    data = raw_input()
-    #    if data:
-    #         s.sendall(data)
-
-## testing recieve streaming
     while True:
+       data = raw_input()
+       if data:
+            s.sendall(data)
        data= s.recv(1024)
        if data:
            print'Received %s' %repr(data)
+
+## testing recieve streaming
+    # while True:
+    #    data= s.recv(1024)
+    #    if data:
+    #        print'Received %s' %repr(data)
 except:
     print "server not started"
