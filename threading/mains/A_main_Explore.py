@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
-from arduinoServer import robotAPI
-from androidServer2 import androidAPI
-from pcServer import pcAPI
+# from arduinoServer import robotAPI
+from androidServer import androidAPI
+# from pcServer import pcAPI
 from config import *
 
 import Queue
@@ -17,12 +17,14 @@ class Main:
         # os.system("sudo hciconfig hci0 piscan")
 
         # initial connections
-        # self.android = androidAPI()
-        self.robot = robotAPI()
-        self.pc = pcAPI()
-        self.pc.init_pc_comm()
-        # self.android.connect()
-        self.robot.connect_serial()
+        self.android = androidAPI()
+        self.android.connect()
+        # self.robot = robotAPI()
+        # self.robot.connect_serial()
+        # self.pc = pcAPI()
+        # self.pc.init_pc_comm()
+
+
         
 
         # initialize queues
@@ -46,6 +48,19 @@ class Main:
                 self.android.write(msg)
                 print "Write to android: %s\n" % msg
 
+        # read/write Robot
+    def readAndroid2(self, Pqueue):
+        while 1:
+            msg = self.android.read()
+            Pqueue.put_nowait(msg)
+            print "Read from BT: %s\n" % msg
+
+    def writeAndroid2(self, Aqueue):
+        while 1:
+            msg =  raw_input()
+            self.android.write(msg)
+            print "Write to android: %s\n" % msg
+
     # read/write Robot
     def readRobot(self, Pqueue):
         while 1:
@@ -59,6 +74,19 @@ class Main:
                 msg = Rqueue.get_nowait()
                 self.robot.write_to_serial(msg)
                 print "Write to Robot: %s\n" % msg
+
+        # read/write Robot
+    def readRobot2(self, Pqueue):
+        while 1:
+            msg = self.robot.read_from_serial()
+            Pqueue.put_nowait(msg)
+            print "Read from Robot: %s\n" % msg
+
+    def writeRobot2(self):
+        while 1:
+            msg =  raw_input()
+            self.robot.write_to_serial(msg)
+            print "Write to Robot: %s\n" % msg
 
     # read/write Robot
 
@@ -87,6 +115,12 @@ class Main:
                    self.pc.write_to_PC(msg)
                    print "Write to PC: %s\n" % msg
 
+    def writePC2(self):
+        while 1:
+            msg =  raw_input()
+            self.pc.write_to_PC(msg)
+            print "Write to PC: %s\n" % msg
+
 
     # Define a function for testing Mthread
     # def print_time(self, tName, delay):
@@ -108,13 +142,14 @@ class Main:
             #    thread.start_new_thread(self.print_time, ("Thread-1", 2, ))
 
                 # PC responds to init command
-               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
-               thread.start_new_thread(self.readRobot,(self.Pqueue,))
+            #    thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
+            #    thread.start_new_thread(self.writePC2,())
+               thread.start_new_thread(self.writeAndroid2,(self.Aqueue,))
             #     explore path msg
-               thread.start_new_thread(self.writeRobot,(self.Rqueue,))
+               thread.start_new_thread(self.readAndroid2,(self.Pqueue,))
             #     # sensor reading msg
-
-               thread.start_new_thread(self.writePC,(self.Pqueue,))
+              
+            #    thread.start_new_thread(self.writePC,(self.Pqueue,))
                  # map info
             #    thread.start_new_thread(self.writeAndroid,(self.Aqueue,))
             #    # image recognition????????????????
@@ -158,7 +193,7 @@ try:
         # mode = main.getMode()
         # print 'write init command %s' %mode
         ## Android send init command: 'explore' or 'fastest path'
-    main.pc.write_to_PC('ae')
+    # main.pc.write_to_PC('ae')
     main.robot.write_to_serial('ae')
         ## after send init command, start Mthread 
     main.Mthreads('e')
