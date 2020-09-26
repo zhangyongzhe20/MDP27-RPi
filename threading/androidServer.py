@@ -91,12 +91,12 @@ if __name__ == "__main__":
     # bt.init_bluetooth()
     bt.connect_bluetooth()
     
-    send_msg = raw_input()
-    print "Write(): %s " % send_msg
-    bt.write_to_bt(send_msg)
+    # send_msg = raw_input()
+    # print "Write(): %s " % send_msg
+    # bt.write_to_bt(send_msg)
 
-    #print "read"
-    # print "data received: %s " % bt.read_from_bt()
+    print "read"
+    print "data received: %s " % bt.read_from_bt()
 
     print "closing sockets"
     bt.close_bt_socket()
