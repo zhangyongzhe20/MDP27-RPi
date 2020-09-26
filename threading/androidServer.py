@@ -35,11 +35,10 @@ class AndroidAPI(object):
         Connect to the Nexus 7 device
         """
         # Creating the server socket and bind to port		
-        btport = 4
         try:
             self.server_socket = BluetoothSocket( RFCOMM )
             self.server_socket.bind(("", RFCOMM_PORT))
-            self.server_socket.listen(1)	# Listen for requests
+            self.server_socket.listen(RFCOMM_PORT)	# Listen for requests
             self.port = self.server_socket.getsockname()[1]
             # uuid = "00001101-0000-1000-8000-00805F9B34FB"
 
