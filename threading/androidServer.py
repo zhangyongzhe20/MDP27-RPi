@@ -49,9 +49,7 @@ class AndroidAPI(object):
             advertise_service( self.server_socket, "MDP27Server",
                                service_id = UUID,
                                service_classes = [ UUID, SERIAL_PORT_CLASS ],
-                               profiles = [ SERIAL_PORT_PROFILE ],
-                               protocols = [ OBEX_UUID ]
-                                )
+                               profiles = [ SERIAL_PORT_PROFILE ]                                )
             print "6"
             print "Waiting for BT connection on RFCOMM channel %d" % self.port
             # Accept requests
