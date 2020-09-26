@@ -36,11 +36,15 @@ class AndroidAPI(object):
         """
         # Creating the server socket and bind to port		
         try:
+            print "1"
             self.server_socket = BluetoothSocket( RFCOMM )
+            print "2"
             self.server_socket.bind(("", RFCOMM_PORT))
+            print "3"
             self.server_socket.listen(RFCOMM_PORT)	# Listen for requests
+            print "4"
             self.port = self.server_socket.getsockname()[1]
-            # uuid = "00001101-0000-1000-8000-00805F9B34FB"
+            print "5"
 
             advertise_service( self.server_socket, "SampleServer",
                                service_id = UUID,
