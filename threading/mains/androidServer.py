@@ -54,7 +54,7 @@ class androidAPI(object):
         except Exception, e:
             print "Error: %s" %str(e)
 
-    def write_to_bt(self, message):
+    def write(self, message):
         """
         Write message to Nexus
         """
@@ -65,7 +65,7 @@ class androidAPI(object):
             self.connect()	# Reestablish connection
 
             
-    def read_from_bt(self):
+    def read(self):
         """
         Read incoming message from Nexus
         """
@@ -86,10 +86,10 @@ class androidAPI(object):
     
 #     # send_msg = raw_input()
 #     # print "Write(): %s " % send_msg
-#     # bt.write_to_bt(send_msg)
+#     # bt.write(send_msg)
 
 #     print "read"
-#     print "data received: %s " % bt.read_from_bt()
+#     print "data received: %s " % bt.read()
 
 #     print "closing sockets"
 #     bt.close_bt_socket()
