@@ -45,7 +45,6 @@ class AndroidAPI(object):
                                service_id = UUID,
                                service_classes = [ UUID, SERIAL_PORT_CLASS ],
                                profiles = [ SERIAL_PORT_PROFILE ]                                )
-            print "6"
             print "Waiting for BT connection on RFCOMM channel %d" % self.port
             # Accept requests
             self.client_socket, client_address = self.server_socket.accept()
