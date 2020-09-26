@@ -3,7 +3,7 @@ from config import RFCOMM_PORT as RFCOMM_PORT, UUID as UUID, ANDROID_SOCKET_BUFF
 
 __author__ = 'Zhang Y.Z.'
 
-class AndroidAPI(object):
+class androidAPI(object):
 
     def __init__(self):
         self.server_socket = None
@@ -79,18 +79,18 @@ class AndroidAPI(object):
 
 
 
-if __name__ == "__main__":
-    print "Running Main"
-    bt = AndroidAPI()
-    bt.connect_bluetooth()
+# if __name__ == "__main__":
+#     print "Running Main"
+#     bt = AndroidAPI()
+#     bt.connect_bluetooth()
     
-    # send_msg = raw_input()
-    # print "Write(): %s " % send_msg
-    # bt.write_to_bt(send_msg)
+#     # send_msg = raw_input()
+#     # print "Write(): %s " % send_msg
+#     # bt.write_to_bt(send_msg)
 
-    print "read"
-    print "data received: %s " % bt.read_from_bt()
+#     print "read"
+#     print "data received: %s " % bt.read_from_bt()
 
-    print "closing sockets"
-    bt.close_bt_socket()
+#     print "closing sockets"
+#     bt.close_bt_socket()
 
