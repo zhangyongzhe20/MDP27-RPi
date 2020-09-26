@@ -37,8 +37,8 @@ class AndroidAPI(object):
         # Creating the server socket and bind to port		
         try:
             self.server_socket = BluetoothSocket( RFCOMM )
-            # self.server_socket.bind(("", RFCOMM_PORT))
-            # self.server_socket.listen(RFCOMM_PORT)	# Listen for requests
+            self.server_socket.bind(("", RFCOMM_PORT))
+            self.server_socket.listen(RFCOMM_PORT)	# Listen for requests
             self.port = self.server_socket.getsockname()[1]
 
             advertise_service( self.server_socket, "MDP27Server",
