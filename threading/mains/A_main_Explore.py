@@ -194,7 +194,7 @@ try:
         # print 'write init command %s' %mode
         ## Android send init command: 'explore' or 'fastest path'
     # main.pc.write_to_PC('ae')
-    main.robot.write_to_serial('ae')
+    # main.robot.write_to_serial('ae')
         ## after send init command, start Mthread 
     main.Mthreads('e')
 
