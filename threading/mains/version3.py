@@ -20,10 +20,14 @@ class Main:
         # initial connections
         self.android = androidAPI()
         self.robot = robotAPI()
-        self.android.connect()
-        self.robot.connect_serial()
         self.pc = pcAPI()
+        ## first establish
+        self.android.connect()
+        ## second establish
         self.pc.init_pc_comm()
+        ## third establish
+        self.robot.connect_serial()
+
 
         # initialize queues
         self.Aqueue = Queue.Queue(maxsize=0)
