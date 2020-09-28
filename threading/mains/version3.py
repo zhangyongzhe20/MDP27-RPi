@@ -106,7 +106,7 @@ class Main:
 
         except Exception, e:
             # print "Error in mode %s: %s" % mode % str(e)
-            print "Error in Mthreadings of Exploration"
+            print "Error in Mthreadings of Exploration %s" %str(e)
         while 1:
             pass
 
