@@ -10,6 +10,7 @@ class robotAPI(object):
 		self.port = ser_port
 		self.baud_rate = baud
 		self.ser = None
+		# self.is_arduino_connected = False
 
 	def connect_serial(self):
 		"""

@@ -90,7 +90,7 @@ class Main:
             if not Pqueue.empty():
                 msg = Pqueue.get_nowait()
                 if msg:
-                    self.pc.write_to_PC(msg)
+                    self.pc.write_to_PC(msg + "\n")
                     print "Write to PC: %s\n" % msg
 
     def Mthreads(self):

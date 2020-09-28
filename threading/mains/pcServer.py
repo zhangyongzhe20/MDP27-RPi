@@ -6,7 +6,6 @@ from config import WIFI_IP as ip, WIFI_PORT as port, PC_BUFFER_SIZE as buffer
 __author__ = "Zhang Y.Z."
 
 class pcAPI(object):
-
     def __init__(self):
         self.tcp_ip = ip
         self.port = port
