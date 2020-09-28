@@ -28,6 +28,7 @@ class Main:
         ## third establish
         self.robot.connect_serial()
 
+        print "All end-devices are connected\n"
 
         # initialize queues
         self.Aqueue = Queue.Queue(maxsize=0)
