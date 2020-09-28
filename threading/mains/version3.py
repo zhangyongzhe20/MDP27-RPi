@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-## Without getMode initially 
+# Without getMode initially
 from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
@@ -13,6 +13,8 @@ import os
 import time
 
 __author__ = "Zhang Y.Z."
+
+
 class Main:
     def __init__(self):
         # allow rpi android to be discoverable
@@ -21,11 +23,11 @@ class Main:
         self.android = androidAPI()
         self.robot = robotAPI()
         self.pc = pcAPI()
-        ## first establish
+        # first establish
         self.android.connect()
-        ## second establish
+        # second establish
         self.pc.init_pc_comm()
-        ## third establish
+        # third establish
         self.robot.connect_serial()
 
         print "All end-devices are connected\n"
@@ -39,9 +41,10 @@ class Main:
     # read/write Android
     def readAndroid(self, Pqueue):
         while 1:
-            msg = self.android.read()
-            Pqueue.put_nowait(msg)
-            print "Read from BT: %s\n" % msg
+            if self.android.bt_is_connect:
+                msg = self.android.read()
+                Pqueue.put_nowait(msg)
+                print "Read from BT: %s\n" % msg
 
     def writeAndroid(self, Aqueue):
         while 1:
@@ -53,9 +56,10 @@ class Main:
     # read/write Robot
     def readRobot(self, Pqueue):
         while 1:
-            msg = self.robot.read_from_serial()
-            Pqueue.put_nowait(msg)
-            print "Read from Robot: %s\n" % msg
+            if self.robot.ser:
+                msg = self.robot.read_from_serial()
+                Pqueue.put_nowait(msg)
+                print "Read from Robot: %s\n" % msg
 
     def writeRobot(self, Rqueue):
         while 1:
@@ -67,19 +71,19 @@ class Main:
     # read/write Robot
     def readPC(self, Rqueue, Aqueue):
         while 1:
-            msg = self.pc.read_from_PC()
-            if msg:
-                destination = msg[0]
-                dataBody = msg[1:]
-                print "Read from PC: %s\n" % msg
-                if destination == 'a':
-                    Aqueue.put_nowait(dataBody)
-                  # fatest path
-                elif destination == 'r':
-                    Rqueue.put_nowait(dataBody)
-                else:
-                    print "unknown destination for pc message"
-        print "readPC is called"
+            if self.pc.pc_is_connected:
+                msg = self.pc.read_from_PC()
+                if msg:
+                    destination = msg[0]
+                    dataBody = msg[1:]
+                    print "Read from PC: %s\n" % msg
+                    if destination == 'a':
+                        Aqueue.put_nowait(dataBody)
+                     # fatest path
+                    elif destination == 'r':
+                        Rqueue.put_nowait(dataBody)
+                    else:
+                        print "unknown destination for pc message"
 
     def writePC(self, Pqueue):
         while 1:
@@ -106,7 +110,7 @@ class Main:
 
         except Exception, e:
             # print "Error in mode %s: %s" % mode % str(e)
-            print "Error in Mthreadings of Exploration %s" %str(e)
+            print "Error in Mthreadings of Exploration %s" % str(e)
         while 1:
             pass
 
