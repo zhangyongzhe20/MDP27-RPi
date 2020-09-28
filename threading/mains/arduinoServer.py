@@ -10,7 +10,7 @@ class robotAPI(object):
 		self.port = ser_port
 		self.baud_rate = baud
 		self.ser = None
-		# self.is_arduino_connected = False
+		self.is_arduino_connected = False
 
 	def connect_serial(self):
 		"""
@@ -18,17 +18,17 @@ class robotAPI(object):
 		"""
 		try:
 			self.ser = serial.Serial(self.port, self.baud_rate)
-			#time.sleep(1)
 			print "Serial link connected"
+			self.is_arduino_connected = True
 		except Exception, e:
-			# print "Error (Serial): %s " % str(e)
-			print "Error: Serial connection not established. Try reconnecting the serial cable and/or restart the pi"
+			print "Error: Serial connection not established."
 
 
 	def close_sr_socket(self):
 		if (self.ser):
 			self.ser.close()
 			print "Closing serial socket"
+			self.is_arduino_connected = False
 
 
 	def write_to_serial(self, msg):
@@ -38,7 +38,7 @@ class robotAPI(object):
 		try:
 			self.ser.write(msg)
 			# print "Write to robot: %s " % msg
-		except AttributeError:
+		except Exception:
 			print "Error in serial comm. No value to be written. Check connection!"
 
 	def read_from_serial(self):
@@ -51,7 +51,7 @@ class robotAPI(object):
 			received_data = self.ser.readline()
 			# print "Received from robot: %s " % received_data
 			return received_data
-		except AttributeError:
+		except Exception:
 			print "Error in serial comm. No value received. Check connection!"
 
 
