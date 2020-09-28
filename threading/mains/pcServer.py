@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 import socket
 import sys
-from config import WIFI_IP as ip, WIFI_PORT as port
+from config import WIFI_IP as ip, WIFI_PORT as port, PC_BUFFER_SIZE as buffer
 
 __author__ = "Zhang Y.Z."
 
@@ -68,13 +68,10 @@ class pcAPI(object):
         Read incoming message from PC
         """
         try:
-            data = self.client.recv(4096)
-            # print "Read [%s] from PC" %pc_data
-            # pc_data = self.client.sendall(data)
+            data = self.client.recv(buffer)
             return data
         except Exception, e:
             print "Error: %s " % str(e)
-            print "Value not read from PC"
 
 # Driver code
 # pc = pcAPI()

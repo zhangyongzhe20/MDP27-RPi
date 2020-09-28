@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 from arduinoServer import robotAPI
-from androidServer2 import androidAPI
+from androidServer import androidAPI
 from pcServer import pcAPI
 from config import *
 

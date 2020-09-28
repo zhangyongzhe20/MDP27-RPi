@@ -1,5 +1,5 @@
 from bluetooth import *
-from config import RFCOMM_PORT as RFCOMM_PORT, UUID as UUID, ANDROID_SOCKET_BUFFER_SIZE as ANDROID_SOCKET_BUFFER_SIZE
+from config import RFCOMM_PORT as RFCOMM_PORT, UUID as UUID, ANDROID_BUFFER_SIZE as buffer
 
 __author__ = 'Zhang Y.Z.'
 
@@ -70,7 +70,7 @@ class androidAPI(object):
         Read incoming message from Nexus
         """
         try:
-            msg = self.client_socket.recv(2048)
+            msg = self.client_socket.recv(buffer)
             return msg
         except BluetoothError:
             print "Bluetooth Error. Connection reset by peer. Trying to connect..."
