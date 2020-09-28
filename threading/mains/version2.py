@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-##getMode: only 'e' for exploaration
+##getMode: 'e' for exploaration and else for fatest-path
 from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
@@ -103,10 +103,26 @@ class Main:
 
             except Exception, e:
                 # print "Error in mode %s: %s" % mode % str(e)
-                print "Error in Mthreading"
-
+                print "Error in Mthreadings of Exploration"
             while 1:
                 pass
+        else:
+            try:
+                # 1: Read from android
+               thread.start_new_thread(self.readAndroid, (self.Pqueue,))
+                # 2: Write to PC
+               thread.start_new_thread(self.writePC,(Pqueue,))
+                # 3: Read from PC
+               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
+                # 4: Write to Robot
+               thread.start_new_thread(self.writeRobot,(self.Rqueue,))
+
+            except Exception, e:
+                # print "Error in mode %s: %s" % mode % str(e)
+                print "Error in Mthreadings of Fatest-path"
+            while 1:
+                pass
+
 
     def getMode(self):
          # default mode is 'explore'

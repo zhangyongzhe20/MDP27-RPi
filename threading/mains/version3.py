@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-##getMode: only 'e' for exploaration
+## Without getMode initially 
 from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
@@ -24,7 +24,7 @@ class Main:
         self.pc.init_pc_comm()
         self.android.connect()
         self.robot.connect_serial()
-        
+
         # initialize queues
         self.Aqueue = Queue.Queue(maxsize=0)
         self.Rqueue = Queue.Queue(maxsize=0)
@@ -68,67 +68,48 @@ class Main:
                 dataBody = msg[1:]
                 print "Read from PC: %s\n" % msg
                 if destination == 'a':
-                   Aqueue.put_nowait(dataBody)
-                 # fatest path
+                    Aqueue.put_nowait(dataBody)
+                  # fatest path
                 elif destination == 'r':
-                   Rqueue.put_nowait(dataBody)
+                    Rqueue.put_nowait(dataBody)
                 else:
-                   print "unknown destination for pc message"
+                    print "unknown destination for pc message"
         print "readPC is called"
-
 
     def writePC(self, Pqueue):
         while 1:
             if not Pqueue.empty():
                 msg = Pqueue.get_nowait()
                 if msg:
-                   self.pc.write_to_PC(msg)
-                   print "Write to PC: %s\n" % msg
+                    self.pc.write_to_PC(msg)
+                    print "Write to PC: %s\n" % msg
 
-    def Mthreads(self, mode):
-        if mode == 'e':
-            try:
-                # 1: Read from android
-               thread.start_new_thread(self.readAndroid, (self.Pqueue,))
-                # 2: Write to PC
-               thread.start_new_thread(self.writePC,(Pqueue,))
-                # 3: Read from PC
-               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
-                # 4: Write to Robot
-               thread.start_new_thread(self.writeRobot,(self.Rqueue,))
-                # 5: Write to Android
-               thread.start_new_thread(self.writeAndroid,(self.Aqueue,))
-                # 6: Read from Arduino
-               thread.start_new_thread(self.readRobot,(self.Pqueue,))
+    def Mthreads(self):
+        try:
+            # 1: Read from android
+            thread.start_new_thread(self.readAndroid, (self.Pqueue,))
+            # 2: Write to PC
+            thread.start_new_thread(self.writePC, (Pqueue,))
+            # 3: Read from PC
+            thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
+            # 4: Write to Robot
+            thread.start_new_thread(self.writeRobot, (self.Rqueue,))
+            # 5: Write to Android
+            thread.start_new_thread(self.writeAndroid, (self.Aqueue,))
+            # 6: Read from Arduino
+            thread.start_new_thread(self.readRobot, (self.Pqueue,))
 
-            except Exception, e:
-                # print "Error in mode %s: %s" % mode % str(e)
-                print "Error in Mthreading"
-
-            while 1:
-                pass
-
-    def getMode(self):
-         # default mode is 'explore'
-        default = 'e'
-        self.msg = self.android.read()
-        if msg:
-            return msg
-        return default
+        except Exception, e:
+            # print "Error in mode %s: %s" % mode % str(e)
+            print "Error in Mthreadings of Exploration"
+        while 1:
+            pass
 
 
 # Driver code
 try:
     main = Main()
-    main.Mthreads('e')
+    main.Mthreads()
 
 except KeyboardInterrupt:
     print "Terminating the main program now..."
-            
-    
-
-
-    
-
-
-
