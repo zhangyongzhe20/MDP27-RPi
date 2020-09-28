@@ -94,7 +94,7 @@ class Main:
             # 1: Read from android
             thread.start_new_thread(self.readAndroid, (self.Pqueue,))
             # 2: Write to PC
-            thread.start_new_thread(self.writePC, (Pqueue,))
+            thread.start_new_thread(self.writePC, (self.Pqueue,))
             # 3: Read from PC
             thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
             # 4: Write to Robot
