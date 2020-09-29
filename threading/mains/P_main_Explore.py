@@ -113,7 +113,7 @@ class Main:
 try:
 
     main = Main()
-    f = open('output.txt', 'r+')
+    f = open('output.txt', 'w+')
     main.Mthreads('e')
 
 except KeyboardInterrupt:
