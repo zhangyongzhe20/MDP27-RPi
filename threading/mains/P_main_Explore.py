@@ -35,6 +35,7 @@ class Main:
                 msg = Aqueue.getnowait()
                 self.android.write(msg)
                 print "Write to android: %s\n" % msg
+                f.write("Write to android: %s\n" % msg)
 
     # read/write Robot
     def readRobot(self, Pqueue):
@@ -42,6 +43,7 @@ class Main:
             msg = self.robot.read_from_serial()
             Pqueue.put_nowait(msg)
             print "Read from Robot: %s\n" % msg
+            f.write("Read from Robot: %s\n" % msg)
 
     def writeRobot(self, Rqueue):
         while 1:
@@ -49,7 +51,7 @@ class Main:
                 msg = Rqueue.get_nowait()
                 self.robot.write_to_serial(msg)
                 print "Write to Robot: %s\n" % msg
-
+                f.write("Write to Robot: %s\n" % msg)
     # read/write Robot
 
     def readPC(self, Rqueue, Aqueue):
@@ -59,6 +61,7 @@ class Main:
                 destination = msg[0]
                 dataBody = msg[1:]
                 print "Read from PC: %s\n" % msg
+                f.write("Read from PC: %s\n" % msg)
                 if destination == 'a':
                    Aqueue.put_nowait(dataBody)
                  # fatest path
@@ -66,13 +69,13 @@ class Main:
                    Rqueue.put_nowait(dataBody)
                 else:
                    print "unknown destination for pc message"
-        print "readPC is called"
 
     def writePC2(self):
         while 1:
             msg =  raw_input()
             self.pc.write_to_PC(msg + "\n")
             print "Write to PC: %s\n" % msg
+            f.write("Write to PC: %s\n" % msg)
 
     def Mthreads(self, mode):
         if mode == 'e':
