@@ -66,7 +66,7 @@ class Main:
     # read/write Robot
     def readRobot2(self, Pqueue):
         while 1:
-            msg = raw_input('read from robot: ')
+            msg = input('read from robot: ')
             if msg:
                 Pqueue.put_nowait(msg)
 
