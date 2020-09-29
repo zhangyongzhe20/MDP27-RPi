@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import os
+from picamera import PiCamera
+from time import sleep
 
 # All the 6 methods for comparison in a list
 # methods = ['cv2.TM_CCOEFF','cv2.TM_CCOEFF_NORMED', 'cv2.TM_CCORR','cv2.TM_CCORR_NORMED', 'cv2.TM_SQDIFF', 'cv2.TM_SQDIFF_NORMED']
@@ -21,8 +23,18 @@ def get_key(thisDict,val):
 
 
 #INPUT IMAGE
-image = cv2.imread('/home/pi/MDP27-RPi/imageRecognition/mdp_labels/x.jpg')
+# image = cv2.imread('/home/pi/MDP27-RPi/imageRecognition/mdp_labels/x.jpg')
 # print("this is ", os.listdir("/home/nishka/Desktop/ImgRec/mdp_labels/"))
+
+
+
+with PiCamera() as camera:
+    with picamera.array.PiRGBArray(camera) as stream:
+        camera.capture(stream, format='bgr')
+        # At this point the image is available as stream.array
+        image = stream.array
+
+
 img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 img2 = img.copy()
 
