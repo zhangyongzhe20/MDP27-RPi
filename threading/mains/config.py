@@ -1,7 +1,7 @@
 #for pc
 WIFI_IP = "192.168.27.27" #"192.168.27.27" #Connecting to IP address of MDPGrp27 192.168.27.225
 WIFI_PORT = 5182
-PC_BUFFER_SIZE = 4096
+PC_BUFFER_SIZE = 2048
 
 #for arduino
 BAUD = 115200
