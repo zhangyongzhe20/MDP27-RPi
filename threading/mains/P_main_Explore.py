@@ -27,6 +27,7 @@ class Main:
             msg = self.android.read()
             Pqueue.put_nowait(msg)
             print "Read from BT: %s\n" % msg
+            f.write("Read from BT: %s\n" % msg)
 
     def writeAndroid(self, Aqueue):
         while 1:
@@ -109,6 +110,7 @@ class Main:
 try:
 
     main = Main()
+    f = open('output.txt', 'r+')
     main.Mthreads('e')
 
 except KeyboardInterrupt:
