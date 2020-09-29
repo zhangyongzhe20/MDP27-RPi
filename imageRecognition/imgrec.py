@@ -29,6 +29,7 @@ image = cv2.imread('/home/pi/MDP27-RPi/imageRecognition/mdp_labels/x.jpg')
 
 
 def image_rec():
+    imgID = -1
     # image = cv2.imread('/home/nishka/Desktop/MDP27-RPi/imageRecognition/mdp_labels/x.jpg')
 
     with PiCamera() as camera:
@@ -151,20 +152,22 @@ def image_rec():
                 top_left = max_loc
             bottom_right = (top_left[0] + w-10, top_left[1] + h-10)
 
-    #print("this is", chosenTem)
-    name = get_key(namedict, chosenTem)
-    text = "Image ID " + str(get_key(iddict, name)) + ": " + name 
-    cv2.putText(image,text, (top_left[0], top_left[1]-5), cv2.FONT_HERSHEY_SIMPLEX, 0.7,(255,0,0),2,cv2.LINE_AA)
-    cv2.rectangle(image,top_left, bottom_right, 255, 2)
-    #cv2.imshow('Output Image', image) 
+    if (top_left):
+        #print("this is", chosenTem)
+        name = get_key(namedict, chosenTem)
+        text = "Image ID " + str(get_key(iddict, name)) + ": " + name 
+        cv2.putText(image,text, (top_left[0], top_left[1]-5), cv2.FONT_HERSHEY_SIMPLEX, 0.7,(255,0,0),2,cv2.LINE_AA)
+        cv2.rectangle(image,top_left, bottom_right, 255, 2)
+        #cv2.imshow('Output Image', image) 
 
-    ts = time.time()
-    oName = str(int(ts)) + ".jpg"
-    cv2.imwrite(oName, image)
-    #cv2.waitKey(0) 
-    #cv2.destroyAllWindows() 
-    imgID = str(get_key(iddict, name))
-    print "ID is: ", imgID
+        ts = time.time()
+        oName = str(int(ts)) + ".jpg"
+        cv2.imwrite(oName, image)
+        #cv2.waitKey(0) 
+        #cv2.destroyAllWindows() 
+        
+        imgID = str(get_key(iddict, name))
+        print "ID is: ", imgID
 
     return imgID
 
