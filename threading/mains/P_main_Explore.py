@@ -74,6 +74,14 @@ class Main:
                     Pqueue.put_nowait("c%s" % label)
                 else:
                     print "unknown destination for pc message"
+                    
+    def writePC(self, Pqueue):
+        while 1:
+            if not Pqueue.empty():
+                msg = Pqueue.get_nowait()
+                if msg:
+                    self.pc.write_to_PC(msg + "\n")
+                    print "Write to PC: %s\n" % msg
 
     def writePC2(self):
         while 1:

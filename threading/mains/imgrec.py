@@ -169,5 +169,5 @@ def image_rec():
         
         imgID = str(get_key(iddict, name))
         print "ID is: ", imgID
-
+    print "testing"
     return imgID
