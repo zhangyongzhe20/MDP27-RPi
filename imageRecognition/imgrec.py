@@ -21,30 +21,30 @@ def get_key(thisDict,val):
 
 
 #INPUT IMAGE
-image = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/0.jpg')
+image = cv2.imread('/home/pi/MDP27-RPi/imageRecognition/mdp_labels/x.jpg')
 # print("this is ", os.listdir("/home/nishka/Desktop/ImgRec/mdp_labels/"))
 img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 img2 = img.copy()
 
 
 #READ ALL TEMPLATE IMAGES
-tv = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tv.jpg',0)
-tw = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tw.jpg',0)
-tx = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tx.jpg',0)
-ty =  cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/ty.jpg',0)
-tz = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tz.jpg',0)
+tv = cv2.imread('./mdp_labels/templates/tv.jpg',0)
+tw = cv2.imread('./mdp_labels/templates/tw.jpg',0)
+tx = cv2.imread('./mdp_labels/templates/tx.jpg',0)
+ty =  cv2.imread('./mdp_labels/templates/ty.jpg',0)
+tz = cv2.imread('./mdp_labels/templates/tz.jpg',0)
 
-t6 = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/t6.jpg',0)
-t7 = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/t7.jpg',0)
-t8 = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/t8.jpg',0)
-t9 = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/t9.jpg',0)
-t0 = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/t0.jpg',0)
+t6 = cv2.imread('./mdp_labels/templates/t6.jpg',0)
+t7 = cv2.imread('./mdp_labels/templates/t7.jpg',0)
+t8 = cv2.imread('./mdp_labels/templates/t8.jpg',0)
+t9 = cv2.imread('./mdp_labels/templates/t9.jpg',0)
+t0 = cv2.imread('./mdp_labels/templates/t0.jpg',0)
 
-tright = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tright.jpg',0)
-tleft = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tleft.jpg',0)
-tup = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tup.jpg',0)
-tdown = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tdown.jpg',0)
-tgo = cv2.imread('/home/nishka/Desktop/ImgRec/mdp_labels/templates/tgo.jpg',0)
+tright = cv2.imread('./mdp_labels/templates/tright.jpg',0)
+tleft = cv2.imread('./mdp_labels/templates/tleft.jpg',0)
+tup = cv2.imread('./mdp_labels/templates/tup.jpg',0)
+tdown = cv2.imread('./mdp_labels/templates/tdown.jpg',0)
+tgo = cv2.imread('./mdp_labels/templates/tgo.jpg',0)
 
 
 tdict = {
@@ -136,15 +136,15 @@ for template in templateList:
             top_left = max_loc
         bottom_right = (top_left[0] + w-10, top_left[1] + h-10)
 
-print("this is", chosenTem)
+#print("this is", chosenTem)
 name = get_key(namedict, chosenTem)
 text = "Image ID " + str(get_key(iddict, name)) + ": " + name 
 cv2.putText(image,text, (top_left[0], top_left[1]-5), cv2.FONT_HERSHEY_SIMPLEX, 0.7,(255,0,0),2,cv2.LINE_AA)
 cv2.rectangle(image,top_left, bottom_right, 255, 2)
-cv2.imshow('Output Image', image) 
+#cv2.imshow('Output Image', image) 
 
-cv2.waitKey(0) 
-cv2.destroyAllWindows() 
+#cv2.waitKey(0) 
+#cv2.destroyAllWindows() 
 print "ID is: ", str(get_key(iddict, name))
 
 
