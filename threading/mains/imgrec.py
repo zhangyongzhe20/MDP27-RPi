@@ -4,6 +4,7 @@ import os
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import time
+import os
 
 # All the 6 methods for comparison in a list
 # methods = ['cv2.TM_CCOEFF','cv2.TM_CCOEFF_NORMED', 'cv2.TM_CCORR','cv2.TM_CCORR_NORMED', 'cv2.TM_SQDIFF', 'cv2.TM_SQDIFF_NORMED']
@@ -36,7 +37,6 @@ def image_rec():
         with PiRGBArray(camera) as stream:
             camera.resolution = (640, 480)
             camera.capture(stream, format='bgr', use_video_port=True) 
-            # camera.capture(stream, format='bgr') #was format='bgr'
             # At this point the image is available as stream.array
             image = stream.array
 
@@ -165,11 +165,13 @@ def image_rec():
 
         ts = time.time()
         oName = str(int(ts)) + ".jpg"
+        path = '/home/pi/MDP27-RPi/threading/mains/output_images'
+        cv2.imwrite(os.path.join(path, oName), image)
         cv2.imwrite(oName, image)
         #cv2.waitKey(0) 
         #cv2.destroyAllWindows() 
         
         imgID = str(get_key(iddict, name))
         print "ID is: ", imgID
-    print "testing"
+
     return imgID
