@@ -55,7 +55,7 @@ class Main:
                 f.write("Write to Robot: %s\n" % msg)
     # read/write Robot
 
-    def readPC(self, Rqueue, Aqueue):
+    def readPC(self, Rqueue, Aqueue, Pqueue):
         while 1:
             msg = self.pc.read_from_PC()
             if msg:
@@ -87,7 +87,7 @@ class Main:
             try:
                 # PC responds to init command
                 thread.start_new_thread(
-                    self.readPC, (self.Rqueue, self.Aqueue, ))
+                    self.readPC, (self.Rqueue, self.Aqueue, self.Pqueue,))
             #    thread.start_new_thread(self.readRobot,(self.Pqueue,))
             #     explore path msg
             #    thread.start_new_thread(self.writeRobot,(self.Rqueue,))
