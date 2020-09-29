@@ -155,7 +155,7 @@ cv2.putText(image,text, (top_left[0], top_left[1]-5), cv2.FONT_HERSHEY_SIMPLEX, 
 cv2.rectangle(image,top_left, bottom_right, 255, 2)
 #cv2.imshow('Output Image', image) 
 
-cv2.imsave("output.jpg", image)
+cv2.imwrite("output.jpg", image)
 #cv2.waitKey(0) 
 #cv2.destroyAllWindows() 
 print "ID is: ", str(get_key(iddict, name))
