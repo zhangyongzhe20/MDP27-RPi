@@ -171,6 +171,3 @@ def image_rec():
         print "ID is: ", imgID
 
     return imgID
-
-print(image_rec())
-
