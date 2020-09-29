@@ -3,7 +3,6 @@ import numpy as np
 import os
 from picamera import PiCamera
 from picamera.array import PiRGBArray
-from time import sleep
 
 # All the 6 methods for comparison in a list
 # methods = ['cv2.TM_CCOEFF','cv2.TM_CCOEFF_NORMED', 'cv2.TM_CCORR','cv2.TM_CCORR_NORMED', 'cv2.TM_SQDIFF', 'cv2.TM_SQDIFF_NORMED']
@@ -156,6 +155,7 @@ cv2.putText(image,text, (top_left[0], top_left[1]-5), cv2.FONT_HERSHEY_SIMPLEX, 
 cv2.rectangle(image,top_left, bottom_right, 255, 2)
 #cv2.imshow('Output Image', image) 
 
+cv2.imsave("output.jpg", image)
 #cv2.waitKey(0) 
 #cv2.destroyAllWindows() 
 print "ID is: ", str(get_key(iddict, name))
