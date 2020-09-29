@@ -75,7 +75,7 @@ class Main:
             msg =  raw_input("write to pc:")
             self.pc.write_to_PC(msg + "\n")
             # print "Write to PC: %s\n" % msg
-            f.write("Write to PC: %s\n" % msg)
+            f.write("Write to PC\n: %s\n" % msg)
 
     def Mthreads(self, mode):
         if mode == 'e':
