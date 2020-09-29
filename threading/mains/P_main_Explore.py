@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 from pcServer import pcAPI
 from config import *
-from imageRecognition.imgrec import image_rec
+from imgrec import image_rec
 import Queue
 import thread
 import threading
