@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 from pcServer import pcAPI
 from config import *
-
+from imageRecognition.imgrec import image_rec
 import Queue
 import thread
 import threading
@@ -9,11 +9,12 @@ import os
 import time
 
 __author__ = "Zhang Y.Z."
+
+
 class Main:
     def __init__(self):
         self.pc = pcAPI()
         self.pc.init_pc_comm()
-        
 
         # initialize queues
         self.Aqueue = Queue.Queue(maxsize=0)
@@ -63,16 +64,20 @@ class Main:
                 print "Read from PC: %s\n" % msg
                 f.write("Read from PC: %s\n" % msg)
                 if destination == 'a':
-                   Aqueue.put_nowait(dataBody)
-                 # fatest path
+                    Aqueue.put_nowait(dataBody)
+                  # fatest path
                 elif destination == 'r':
-                   Rqueue.put_nowait(dataBody)
+                    Rqueue.put_nowait(dataBody)
+                    # trigger camera
+                elif destination == 'c':
+                    label = image_rec()
+                    Pqueue.put_nowait("c%s" % label)
                 else:
-                   print "unknown destination for pc message"
+                    print "unknown destination for pc message"
 
     def writePC2(self):
         while 1:
-            msg =  raw_input("write to pc:\n")
+            msg = raw_input("write to pc:\n")
             self.pc.write_to_PC(msg + "\n")
             # print "Write to PC: %s\n" % msg
             f.write("Write to PC: %s\n" % msg)
@@ -81,16 +86,16 @@ class Main:
         if mode == 'e':
             try:
                 # PC responds to init command
-               thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
+                thread.start_new_thread(
+                    self.readPC, (self.Rqueue, self.Aqueue, ))
             #    thread.start_new_thread(self.readRobot,(self.Pqueue,))
             #     explore path msg
             #    thread.start_new_thread(self.writeRobot,(self.Rqueue,))
             #     # sensor reading msg
-               thread.start_new_thread(self.writePC2,())
+                thread.start_new_thread(self.writePC2, ())
             #    thread.start_new_thread(self.writePC,(self.Pqueue,))
-                 # map info
+                # map info
             #    thread.start_new_thread(self.writeAndroid,(self.Aqueue,))
-
 
             except Exception, e:
                 # print "Error in mode %s: %s" % mode % str(e)
@@ -99,9 +104,8 @@ class Main:
             while 1:
                 pass
 
-
     def getMode(self):
-         # default mode is 'explore'
+        # default mode is 'explore'
         default = 'e'
         self.msg = self.android.read()
         if msg:
@@ -118,11 +122,3 @@ try:
 
 except KeyboardInterrupt:
     print "Terminating the main program now..."
-            
-    
-
-
-    
-
-
-

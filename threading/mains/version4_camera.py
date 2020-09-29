@@ -5,6 +5,7 @@ from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
 from config import *
+from imageRecognition.imgrec import image_rec
 
 import Queue
 import thread
@@ -46,14 +47,13 @@ class Main:
                 if msg:
                     Pqueue.put_nowait(msg)
                     print "Read from BT: %s\n" % msg
-                    f.write("Read from BT: %s\n" % msg)
+
     def writeAndroid(self, Aqueue):
         while 1:
             if not Aqueue.empty():
-                msg = Aqueue.get_nowait()
+                msg = Aqueue.getnowait()
                 self.android.write(msg)
                 print "Write to android: %s\n" % msg
-                f.write("Write to android: %s\n" % msg)
 
     # read/write Robot
     def readRobot(self, Pqueue):
@@ -63,14 +63,6 @@ class Main:
                 if msg:
                     Pqueue.put_nowait(msg)
                     print "Read from Robot: %s\n" % msg
-                    f.write("Read from Robot: %s\n" % msg)
-
-    # read/write Robot
-    def readRobot2(self, Pqueue):
-        while 1:
-            msg = raw_input("read from robot:\n")
-            if msg:
-                Pqueue.put_nowait(msg)
 
     def writeRobot(self, Rqueue):
         while 1:
@@ -78,7 +70,6 @@ class Main:
                 msg = Rqueue.get_nowait()
                 self.robot.write_to_serial(msg)
                 print "Write to Robot: %s\n" % msg
-                f.write("Write to Robot: %s\n" % msg)
 
     # read/write Robot
     def readPC(self, Rqueue, Aqueue):
@@ -89,15 +80,18 @@ class Main:
                     destination = msg[0]
                     dataBody = msg[1:]
                     print "Read from PC: %s\n" % msg
-                    f.write("Read from PC: %s\n" % msg)
+                    ##send to android
                     if destination == 'a':
                         Aqueue.put_nowait(dataBody)
-                     # fatest path
+                    ##send to robot
                     elif destination == 'r':
                         Rqueue.put_nowait(dataBody)
+                    ##trigger camera       
+                    elif destination == 'c':
+                        label = image_rec()
+                        Pqueue.put_nowait("c%s" %label)
                     else:
                         print "unknown destination for pc message"
-                        f.write("unknown destination for pc message")
 
     def writePC(self, Pqueue):
         while 1:
@@ -106,7 +100,6 @@ class Main:
                 if msg:
                     self.pc.write_to_PC(msg + "\n")
                     print "Write to PC: %s\n" % msg
-                    f.write("Write to PC: %s\n" % msg)
 
     def Mthreads(self):
         try:
@@ -121,21 +114,19 @@ class Main:
             # 5: Write to Android
             thread.start_new_thread(self.writeAndroid, (self.Aqueue,))
             # 6: Read from Arduino
-            thread.start_new_thread(self.readRobot2, (self.Pqueue,))
+            thread.start_new_thread(self.readRobot, (self.Pqueue,))
 
         except Exception, e:
+            # print "Error in mode %s: %s" % mode % str(e)
             print "Error in Mthreadings of Exploration %s" % str(e)
-            f.write("Error in Mthreadings of Exploration %s" % str(e))
         while 1:
             pass
 
 
 # Driver code
 try:
-    f = open('output_v5.txt', 'w+')
     main = Main()
     main.Mthreads()
 
 except KeyboardInterrupt:
     print "Terminating the main program now..."
-    f.write("Terminating the main program now...")
