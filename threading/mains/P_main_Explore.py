@@ -93,7 +93,7 @@ class Main:
             #    thread.start_new_thread(self.writeRobot,(self.Rqueue,))
             #     # sensor reading msg
                 thread.start_new_thread(self.writePC2, ())
-            #    thread.start_new_thread(self.writePC,(self.Pqueue,))
+                thread.start_new_thread(self.writePC,(self.Pqueue,))
                 # map info
             #    thread.start_new_thread(self.writeAndroid,(self.Aqueue,))
 
