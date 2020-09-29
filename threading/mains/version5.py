@@ -5,6 +5,7 @@ from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
 from config import *
+from imgrec import image_rec
 
 import Queue
 import thread
@@ -47,6 +48,7 @@ class Main:
                     Pqueue.put_nowait(msg)
                     print "Read from BT: %s\n" % msg
                     f.write("Read from BT: %s\n" % msg)
+
     def writeAndroid(self, Aqueue):
         while 1:
             if not Aqueue.empty():
@@ -81,7 +83,7 @@ class Main:
                 f.write("Write to Robot: %s\n" % msg)
 
     # read/write Robot
-    def readPC(self, Rqueue, Aqueue):
+    def readPC(self, Rqueue, Aqueue, Pqueue):
         while 1:
             if self.pc.pc_is_connected:
                 msg = self.pc.read_from_PC()
@@ -92,9 +94,12 @@ class Main:
                     f.write("Read from PC: %s\n" % msg)
                     if destination == 'a':
                         Aqueue.put_nowait(dataBody)
-                     # fatest path
                     elif destination == 'r':
                         Rqueue.put_nowait(dataBody)
+                    # trigger camera
+                    elif destination == 'c':
+                       label = image_rec()
+                       Pqueue.put_nowait("c%s" % label)
                     else:
                         print "unknown destination for pc message"
                         f.write("unknown destination for pc message")
@@ -115,7 +120,7 @@ class Main:
             # 2: Write to PC
             thread.start_new_thread(self.writePC, (self.Pqueue,))
             # 3: Read from PC
-            thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, ))
+            thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, self.Pqueue,))
             # 4: Write to Robot
             thread.start_new_thread(self.writeRobot, (self.Rqueue,))
             # 5: Write to Android
