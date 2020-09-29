@@ -1,8 +1,8 @@
 import cv2
 import numpy as np
 import os
-# from picamera import PiCamera
-# from picamera.array import PiRGBArray
+from picamera import PiCamera
+from picamera.array import PiRGBArray
 import time
 
 # All the 6 methods for comparison in a list
@@ -24,7 +24,7 @@ def get_key(thisDict,val):
 
 
 #INPUT IMAGE
-image = cv2.imread('/home/pi/MDP27-RPi/imageRecognition/mdp_labels/x.jpg')
+# image = cv2.imread('/home/pi/MDP27-RPi/imageRecognition/mdp_labels/x.jpg')
 # print("this is ", os.listdir("/home/nishka/Desktop/ImgRec/mdp_labels/"))
 
 
@@ -34,7 +34,7 @@ def image_rec():
 
     with PiCamera() as camera:
         with PiRGBArray(camera) as stream:
-            camera.capture(stream, format='yuv') #was format='bgr'
+            camera.capture(stream, format='bgr') #was format='bgr'
             # At this point the image is available as stream.array
             image = stream.array
 
@@ -136,6 +136,7 @@ def image_rec():
 
     chosenTem = []
     minTem = 90000000000
+    top_left = 'lala'
     for template in templateList: 
         w, h = template.shape[::-1]
         # Apply template Matching
@@ -152,7 +153,7 @@ def image_rec():
                 top_left = max_loc
             bottom_right = (top_left[0] + w-10, top_left[1] + h-10)
 
-    if (top_left):
+    if (top_left != 'lala'):
         #print("this is", chosenTem)
         name = get_key(namedict, chosenTem)
         text = "Image ID " + str(get_key(iddict, name)) + ": " + name 
@@ -171,5 +172,5 @@ def image_rec():
 
     return imgID
 
-# image_rec()
+print(image_rec())
 
