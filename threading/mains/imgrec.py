@@ -34,7 +34,9 @@ def image_rec():
 
     with PiCamera() as camera:
         with PiRGBArray(camera) as stream:
-            camera.capture(stream, format='bgr') #was format='bgr'
+            camera.resolution = (640, 480)
+            camera.capture(stream, format='bgr', use_video_port=True) 
+            # camera.capture(stream, format='bgr') #was format='bgr'
             # At this point the image is available as stream.array
             image = stream.array
 
