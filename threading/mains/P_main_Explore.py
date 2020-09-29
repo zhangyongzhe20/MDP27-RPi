@@ -72,9 +72,9 @@ class Main:
 
     def writePC2(self):
         while 1:
-            msg =  raw_input()
+            msg =  raw_input("write to pc:")
             self.pc.write_to_PC(msg + "\n")
-            print "Write to PC: %s\n" % msg
+            # print "Write to PC: %s\n" % msg
             f.write("Write to PC: %s\n" % msg)
 
     def Mthreads(self, mode):
