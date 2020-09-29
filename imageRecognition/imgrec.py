@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import os
 from picamera import PiCamera
+from picamera.array import PiRGBArray
 from time import sleep
 
 # All the 6 methods for comparison in a list
@@ -29,7 +30,7 @@ def get_key(thisDict,val):
 
 
 with PiCamera() as camera:
-    with picamera.array.PiRGBArray(camera) as stream:
+    with PiRGBArray(camera) as stream:
         camera.capture(stream, format='bgr')
         # At this point the image is available as stream.array
         image = stream.array
