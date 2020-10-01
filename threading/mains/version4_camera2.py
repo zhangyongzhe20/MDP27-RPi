@@ -12,6 +12,7 @@ import thread
 import threading
 import os
 import time
+import datetime
 
 __author__ = "Zhang Y.Z."
 
@@ -103,6 +104,7 @@ class Main:
 
 
     def take_pic(self):
+        start_time = datetime.now()
         try:
             # initialize the camera and grab a reference to the raw camera capture
             camera = PiCamera(resolution=(IMAGE_WIDTH, IMAGE_HEIGHT))  # '1920x1080'

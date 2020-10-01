@@ -88,24 +88,26 @@ class Main:
     # read/write Robot
     def readPC(self, Rqueue, Aqueue, Pqueue):
         while 1:
-            if self.pc.pc_is_connected:
-                msg = self.pc.read_from_PC()
-                if msg:
-                    destination = msg[0]
-                    dataBody = msg[1:]
-                    print "Read from PC: %s\n" % msg
-                    f.write("Read from PC: %s\n" % msg)
-                    if destination == 'a':
-                        Aqueue.put_nowait(dataBody)
-                    elif destination == 'r':
-                        Rqueue.put_nowait(dataBody)
-                    # trigger camera
-                    elif destination == 'c':
-                        image_array = self.take_pic()
-                        # print "image array: %s" %image_array
-                    else:
-                        print "unknown destination for pc message"
-                        f.write("unknown destination for pc message")
+            msg = raw_input("read from PC:\n")
+            Aqueue.put_nowait(msg)
+            # if self.pc.pc_is_connected:
+            #     msg = self.pc.read_from_PC()
+            #     if msg:
+            #         destination = msg[0]
+            #         dataBody = msg[1:]
+            #         print "Read from PC: %s\n" % msg
+            #         f.write("Read from PC: %s\n" % msg)
+            #         if destination == 'a':
+            #             Aqueue.put_nowait(dataBody)
+            #         elif destination == 'r':
+            #             Rqueue.put_nowait(dataBody)
+            #         # trigger camera
+            #         elif destination == 'c':
+            #             image_array = self.take_pic()
+            #             # print "image array: %s" %image_array
+            #         else:
+            #             print "unknown destination for pc message"
+            #             f.write("unknown destination for pc message")
 
     def writePC(self, Pqueue):
         while 1:
@@ -147,15 +149,15 @@ class Main:
             # 1: Read from android
             thread.start_new_thread(self.readAndroid, (self.Pqueue,))
             # 2: Write to PC
-            thread.start_new_thread(self.writePC, (self.Pqueue,))
+            # thread.start_new_thread(self.writePC, (self.Pqueue,))
             # 3: Read from PC
             thread.start_new_thread(self.readPC, (self.Rqueue, self.Aqueue, self.Pqueue,))
             # 4: Write to Robot
-            thread.start_new_thread(self.writeRobot, (self.Rqueue,))
+            # thread.start_new_thread(self.writeRobot, (self.Rqueue,))
             # 5: Write to Android
             thread.start_new_thread(self.writeAndroid, (self.Aqueue,))
             # 6: Read from Arduino
-            thread.start_new_thread(self.readRobot2, (self.Pqueue,))
+            # thread.start_new_thread(self.readRobot2, (self.Pqueue,))
 
         except Exception, e:
             print "Error in Mthreadings of Exploration %s" % str(e)

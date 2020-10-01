@@ -24,11 +24,11 @@ class Main:
         # allow rpi android to be discoverable
         # os.system("sudo hciconfig hci0 piscan")
         # initial connections
-        self.android = androidAPI()
+        # self.android = androidAPI()
         self.robot = robotAPI()
         self.pc = pcAPI()
         # first establish
-        self.android.connect()
+        # self.android.connect()
         # second establish
         self.pc.init_pc_comm()
         # third establish
@@ -45,18 +45,15 @@ class Main:
     # read/write Android
     def readAndroid(self, Pqueue):
         while 1:
-            if self.android.bt_is_connect:
-                msg = self.android.read()
-                if msg:
-                    Pqueue.put_nowait(msg)
-                    print "Read from BT: %s\n" % msg
-                    f.write("Read from BT: %s\n" % msg)
+            msg = raw_input("read from Android:\n")
+            Pqueue.put_nowait(msg)
+            f.write("Read from BT: %s\n" % msg)
+
 
     def writeAndroid(self, Aqueue):
         while 1:
             if not Aqueue.empty():
                 msg = Aqueue.get_nowait()
-                self.android.write(msg)
                 print "Write to android: %s\n" % msg
                 f.write("Write to android: %s\n" % msg)
 
@@ -155,7 +152,7 @@ class Main:
             # 5: Write to Android
             thread.start_new_thread(self.writeAndroid, (self.Aqueue,))
             # 6: Read from Arduino
-            thread.start_new_thread(self.readRobot2, (self.Pqueue,))
+            thread.start_new_thread(self.readRobot, (self.Pqueue,))
 
         except Exception, e:
             print "Error in Mthreadings of Exploration %s" % str(e)
