@@ -44,9 +44,9 @@ class Main:
     def Mthreads(self):
         try:
             # 1: Read from android
-            thread.start_new_thread(self.readAndroid)
+            thread.start_new_thread(self.readAndroid,())
             # 5: Write to Android
-            thread.start_new_thread(self.writeAndroid)
+            thread.start_new_thread(self.writeAndroid,())
 
         except Exception, e:
             # print "Error in mode %s: %s" % mode % str(e)
