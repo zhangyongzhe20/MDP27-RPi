@@ -1,0 +1,2 @@
+Write to PC: r37|81|17|81|49
+Read from PC: cp
