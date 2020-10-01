@@ -24,14 +24,14 @@ class Main:
 
 
     # read/write Android
-    def readAndroid(self, Pqueue):
+    def readAndroid(self):
         while 1:
             if self.android.bt_is_connect:
                 msg = self.android.read()
                 if msg:
                     print "Read from BT: %s\n" % msg
 
-    def writeAndroid(self, Aqueue):
+    def writeAndroid(self):
         while 1:
             send_msg = raw_input()
             
