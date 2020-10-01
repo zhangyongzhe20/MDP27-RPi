@@ -167,7 +167,7 @@ def image_rec():
         oName = str(int(ts)) + ".jpg"
         path = '/home/pi/MDP27-RPi/threading/mains/output_images'
         cv2.imwrite(os.path.join(path, oName), image)
-        cv2.imwrite(oName, image)
+        # cv2.imwrite(oName, image)
         #cv2.waitKey(0) 
         #cv2.destroyAllWindows() 
         
