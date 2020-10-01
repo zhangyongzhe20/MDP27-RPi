@@ -5,7 +5,6 @@ from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
 from config import *
-from imgrec import image_rec
 
 import Queue
 import thread
