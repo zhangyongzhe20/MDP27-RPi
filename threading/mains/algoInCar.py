@@ -97,8 +97,8 @@ class Main:
                     elif destination == 'r':
                         Rqueue.put_nowait(dataBody)
                     # trigger camera
-                    elif destination == 'c':
-                        image_array = self.take_pic()
+                    # elif destination == 'c':
+                    #     image_array = self.take_pic()
                         # print "image array: %s" %image_array
                     else:
                         print "unknown destination for pc message"
