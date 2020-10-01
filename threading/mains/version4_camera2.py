@@ -1,12 +1,13 @@
 #!/usr/bin/env python2
 
-# first way of I.R.
+# second way of I.R.  Deep learning
 from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
 from config import *
-from imageRecognition.imgrec import image_rec
-
+from copy_image_to_PC import copy_image_to_PC
+from picamera import PiCamera
+from picamera.array import PiRGBArray
 import Queue
 import thread
 import threading
@@ -88,8 +89,8 @@ class Main:
                         Rqueue.put_nowait(dataBody)
                     ##trigger camera       
                     elif destination == 'c':
-                        label = image_rec()
-                        Pqueue.put_nowait("c%s" %label)
+                        image_array = self.take_pic()
+                        print "image array: %s" %image_array
                     else:
                         print "unknown destination for pc message"
 
@@ -100,6 +101,33 @@ class Main:
                 if msg:
                     self.pc.write_to_PC(msg + "\n")
                     print "Write to PC: %s\n" % msg
+
+
+    def take_pic(self):
+        try:
+            # initialize the camera and grab a reference to the raw camera capture
+            camera = PiCamera(resolution=(IMAGE_WIDTH, IMAGE_HEIGHT))  # '1920x1080'
+            rawCapture = PiRGBArray(camera)
+            
+            # allow the camera to warmup
+            time.sleep(0.1)
+            
+            # grab an image from the camera
+            camera.capture(rawCapture, format=IMAGE_FORMAT)
+            image = rawCapture.array
+            camera.close()
+
+            print('Time taken to take picture: ' + str(datetime.now() - start_time) + 'seconds')
+            
+            # to gather training images
+            # os.system("raspistill -o images/test"+
+            # str(start_time.strftime("%d%m%H%M%S"))+".png -w 1920 -h 1080 -q 100")
+        
+        except Exception as error:
+            print('Taking picture failed: ' + str(error))
+        
+        return image
+    
 
     def Mthreads(self):
         try:
