@@ -5,7 +5,6 @@ from arduinoServer import robotAPI
 from androidServer import androidAPI
 from pcServer import pcAPI
 from config import *
-from copy_image_to_PC import copy_image_to_PC
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 import Queue
