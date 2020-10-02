@@ -30,9 +30,9 @@ class Main:
         # first establish
         self.android.connect()
         # second establish
-        self.pc.init_pc_comm()
+        # self.pc.init_pc_comm()
         # third establish
-        self.robot.connect_serial()
+        # self.robot.connect_serial()
 
         print "All end-devices are connected\n"
 
