@@ -1,5 +1,8 @@
 import cv2
 import numpy as np
+from os import listdir
+from os.path import isfile, join
+import random
 
 IMG_DIR = '/home/nishka/ImgRec/mdp_labels/templates'
 # SYMBOL_TYPES = ['1', '2', '3', '4', '5', 'A', 'B', 'C', 'D', 'E', 'Arrow', 'Circle']
@@ -26,7 +29,7 @@ SYMBOL_ID_MAP = {
 THRESHOLD = 190
 MIN_CONTOUR_AREA = 2000 # Assuming at a distance of 20 - 25cm
 MAX_CONTOUR_AREA = 9000 # Assuming min distance of 10 - 15cm
-MATCH_THRESHOLD = 0.23 + 4
+MATCH_THRESHOLD = 0.23 + 4 #SWA MADE IT 5
 MATCH_CONFIDENCE_COUNT = 5
 ARROW_PIXEL_THRESHOLD = 7
 
@@ -293,7 +296,7 @@ def derive_arrow_orientation(extLeft, extTop, extRight, extBottom):
     
 
 
-def detect(image):
+def img_rec_updated(image):
 
     image = cv2.resize(image, (640, 480))
     resImg = image
@@ -407,8 +410,8 @@ def detect(image):
                 image,
                 # 'Symbol: ' + str(closest_match['symbol']) + '; ID: ' + str(closest_match['id']),
                 "Image ID " + str(closest_match['id']),
-                (extLeft[0] - 35, extTop[1] -7),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.6,(255,0,0),1,cv2.LINE_AA
+                (extLeft[0] - 20, extTop[1] -5),
+                cv2.FONT_HERSHEY_SIMPLEX, 0.4,(255,0,0),1,cv2.LINE_AA
                 # cv2.FONT_HERSHEY_DUPLEX,
                 # 0.5, 
                 # (255, 0, 0)
@@ -435,11 +438,22 @@ def detect(image):
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-img = cv2.imread('/home/nishka/ImgRec/mdp_labels/down.jpeg')
+#generate 5 random inputs
+# inPath = '/home/nishka/ImgRec/mdp_labels/'
+# allInputs = [f for f in listdir(inPath) if isfile(join(inPath, f))]
+# print "this is", allInputs
+# rInputs = random.sample(range(0, len(allInputs)), 5)
+# print "rInputs is ", rInputs
 
-# cv2.imshow("input", img)
-# cv2.waitKey(0)
+# for index in rInputs:
+#     fileName = inPath + allInputs[index]
+#     print("filename here is ", fileName
 
-detect(img)
+inPath = '/home/nishka/ImgRec/mdp_labels/'
+fileName = inPath + 'up.jpeg'
+img = cv2.imread(fileName)
+
+img_rec_updated(img)
+
 
 
