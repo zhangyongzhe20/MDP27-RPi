@@ -52,7 +52,7 @@ class Main:
     def writeAndroid(self, Aqueue):
         while 1:
             if not Aqueue.empty():
-                msg = Aqueue.getnowait()
+                msg = Aqueue.get_nowait()
                 self.android.write(msg)
                 print "Write to android: %s\n" % msg
 

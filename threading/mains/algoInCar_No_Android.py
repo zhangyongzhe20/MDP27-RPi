@@ -63,12 +63,9 @@ class Main:
             if self.robot.is_arduino_connected:
                 msg = self.robot.read_from_serial()
                 if msg:
-                    if msg[0] == 'd':
-                        print "Robot debugging: %s\n" % msg
-                    else:
-                        Pqueue.put_nowait(msg)
-                        print "Read from Robot: %s\n" % msg
-                        f.write("Read from Robot: %s\n" % msg)
+                    Pqueue.put_nowait(msg)
+                    print "Read from Robot: %s\n" % msg
+                    f.write("Read from Robot: %s\n" % msg)
 
     # read/write Robot
     def readRobot2(self, Pqueue):
