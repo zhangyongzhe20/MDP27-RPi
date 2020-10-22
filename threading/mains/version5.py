@@ -95,11 +95,13 @@ class Main:
                     elif destination == 'c':
                         try:
                            label = image_rec()
-                           if label not in self.labels:
-                               self.labels.append(label)
-                               Pqueue.put_nowait("c%s" %label)
                         except:
-                            print ".."
+                            label = -1
+                    if label not in self.labels:
+                       self.labels.append(label)
+                       Pqueue.put_nowait("c%s" %label)
+                    else:
+                        Pqueue.put_nowait("-1")
 
                     else:
                         print "unknown destination for pc message"
