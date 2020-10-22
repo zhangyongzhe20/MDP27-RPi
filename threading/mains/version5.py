@@ -13,6 +13,7 @@ import threading
 import os
 import time
 import datetime
+from imageRecognition.imgrec import image_rec
 
 __author__ = "Zhang Y.Z."
 
@@ -61,7 +62,7 @@ class Main:
         while 1:
             if self.robot.is_arduino_connected:
                 msg = self.robot.read_from_serial()
-                if msg:
+                if msg[0] != 'd':
                     Pqueue.put_nowait(msg)
                     print "Read from Robot: %s\n" % msg
 
@@ -89,8 +90,8 @@ class Main:
                         Rqueue.put_nowait(dataBody)
                     ##trigger camera       
                     elif destination == 'c':
-                        image_array = self.take_pic()
-                        print "image array: %s" %image_array
+                        label = image_rec()
+                        Pqueue.put_nowait("c%s" %label)
                     else:
                         print "unknown destination for pc message"
 
