@@ -94,12 +94,12 @@ class Main:
                     ##trigger camera       
                     elif destination == 'c':
                         try:
-                           label = image_rec()
+                           label = img_rec()
                         except:
                             label = -1
                         if label not in self.labels:
                             self.labels.append(label)
-                            Pqueue.put_nowait("c%s" %label)
+                            Pqueue.put_nowait("%s" %label)
                         else:
                             Pqueue.put_nowait("-1")
                     else:
