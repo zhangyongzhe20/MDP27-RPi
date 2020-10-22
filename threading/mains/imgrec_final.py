@@ -396,6 +396,7 @@ def img_rec():
     rawCapture = PiRGBArray(camera)
     camera.capture(rawCapture,format='bgr',use_video_port=True)
     img = rawCapture.array
+    img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
     image = img[80:, 40:500]
     image = fix_brightness(image)
     label = img_rec_updated(image)
