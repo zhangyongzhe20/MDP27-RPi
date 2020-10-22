@@ -41,6 +41,9 @@ class Main:
         self.Pqueue = Queue.Queue(maxsize=0)
         # initialization done
 
+        # Label lists
+        self.labels = []
+
     # read/write Android
     def readAndroid(self, Pqueue):
         while 1:
@@ -90,8 +93,14 @@ class Main:
                         Rqueue.put_nowait(dataBody)
                     ##trigger camera       
                     elif destination == 'c':
-                        label = image_rec()
-                        Pqueue.put_nowait("c%s" %label)
+                        try:
+                           label = image_rec()
+                           if label not in self.labels:
+                               self.labels.append(label)
+                               Pqueue.put_nowait("c%s" %label)
+                        except:
+                            print ".."
+
                     else:
                         print "unknown destination for pc message"
 
