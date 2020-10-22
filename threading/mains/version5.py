@@ -13,7 +13,7 @@ import threading
 import os
 import time
 import datetime
-from imageRecognition.imgrec import image_rec
+from imgrec_final import img_rec
 
 __author__ = "Zhang Y.Z."
 
@@ -97,12 +97,11 @@ class Main:
                            label = image_rec()
                         except:
                             label = -1
-                    if label not in self.labels:
-                       self.labels.append(label)
-                       Pqueue.put_nowait("c%s" %label)
-                    else:
-                        Pqueue.put_nowait("-1")
-
+                        if label not in self.labels:
+                            self.labels.append(label)
+                            Pqueue.put_nowait("c%s" %label)
+                        else:
+                            Pqueue.put_nowait("-1")
                     else:
                         print "unknown destination for pc message"
 
